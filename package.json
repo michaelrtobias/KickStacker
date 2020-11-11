@@ -1,0 +1,23 @@
+{
+  "name": "kickstacker",
+  "version": "1.0.0",
+  "description": "The ultimate sneaker collector dashboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelrtobias/KickStacker.git"
+  },
+  "author": "Michael Tobias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelrtobias/KickStacker/issues"
+  },
+  "homepage": "https://github.com/michaelrtobias/KickStacker#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  }
+}
