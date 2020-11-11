@@ -4,7 +4,9 @@
   "description": "The ultimate sneaker collector dashboard",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js",
+    "build": "webpack --config webpack.config.js --watch"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,21 @@
   },
   "homepage": "https://github.com/michaelrtobias/KickStacker#readme",
   "dependencies": {
+    "babel-loader": "^8.0.0-beta.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "path": "^0.12.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "babel-plugin-styled-components": "^1.11.1",
+    "babel-watch": "^7.0.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
   }
 }
