@@ -98,18 +98,19 @@ const Cut = db.define('cuts', {
 
 
 
-Shoe.sync()
+Shoe.sync({ alter: true })
 
-User.sync()
+User.sync({ alter: true })
 
-Brand.sync()
+Brand.sync({ alter: true })
 
-Type.sync()
+Type.sync({ alter: true })
 
-Collection.sync()
+Collection.sync({ alter: true })
 
-Model.sync()
+Model.sync({ alter: true })
 
-Cut.sync()
+Cut.sync({ alter: true })
+
 
 module.exports =  {User, Brand, Type, Collection, Model, Cut, Shoe};

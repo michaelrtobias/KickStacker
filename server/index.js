@@ -18,8 +18,12 @@ app.get('/', (req, res) => {
   res.send('Gotta Catch \'Em All')
 })
 
+// get all shoes
 app.get('/shoes', (req, res) => {
-  res.send('get shoes')
+  models.Shoe.findAll({})
+  .then(result => res.json(result))
+  .then(() => console.log('All shoes recieved'))
+  .catch(err => console.log(err))
 })
 
 app.post('/shoes', (req, res) => {
