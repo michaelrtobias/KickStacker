@@ -3,94 +3,100 @@ const db = require('./index.js');
 
 const Shoe = db.define('shoes', {
   name: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   },
   styleCode: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   },
   color: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   },
  size: {
-   type: DataTypes.Int,
+   type: DataTypes.INTEGER,
    allowNull: false
  },
  boxStatus: {
-   type: DataTypes.boolean,
+   type: DataTypes.BOOLEAN,
    allowNull: false
  },
  imageURL: {
-   type: DataTypes.String,
+   type: DataTypes.STRING,
    allowNull: true
  },
  wears: {
-   type: DataTypes.Int,
+   type: DataTypes.INTEGER,
    allowNull: false,
    defaultValue: 0
  },
  purchasePrice: {
-   type: DataTypes.Int,
+   type: DataTypes.INTEGER,
    allowNull: true,
    defaultValue: 0
  },
  description: {
-   type: DataTypes.String,
+   type: DataTypes.STRING,
    allowNull: true
  },
+ receipt: {
+   type: DataTypes.BOOLEAN,
+   allowNull: false
+ },
  nickname: {
-   type: DataTypes.String,
+   type: DataTypes.STRING,
    allowNull: true
  }
 })
 
 const User = db.define('users', {
   firstName: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   },
   lastName: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   }
 })
 
 const Brand = db.define('brands', {
   name: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   }
 })
 
 const Type = db.define('types', {
   name: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   }
 })
 
 const Collection = db.define('collections', {
   name: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   }
 })
 
 const Model = db.define('models', {
   name: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   }
 })
 
 const Cut = db.define('cuts', {
   cut: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false
   }
 })
+
+
 
 Shoe.sync()
 
@@ -106,4 +112,4 @@ Model.sync()
 
 Cut.sync()
 
-module.exports = Shoe;
+module.exports =  {User, Brand, Type, Collection, Model, Cut, Shoe};
