@@ -65,6 +65,10 @@ const Brand = db.define('brands', {
   name: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  headquarters: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 })
 
@@ -96,6 +100,15 @@ const Cut = db.define('cuts', {
   }
 })
 
+Collection.belongsTo(Brand);
+Model.belongsTo(Collection);
+Model.belongsTo(Brand);
+Shoe.belongsTo(Model);
+Shoe.belongsTo(Brand);
+Shoe.belongsTo(User);
+Shoe.belongsTo(Collection);
+Shoe.belongsTo(Cut);
+Shoe.belongsTo(Type);
 
 
 Shoe.sync({ alter: true })

@@ -27,8 +27,30 @@ app.get('/shoes', (req, res) => {
 })
 
 app.post('/shoes', (req, res) => {
-  res.send('post shoes')
-})
+  models.Shoe.create({
+    name: req.body.name,
+    styleCode: req.body.styleCode,
+    color: req.body.color,
+    size: req.body.size,
+    boxStatus: req.body.boxStatus,
+    imageURL: req.body.imageURL,
+    wears: req.body.wears,
+    purchasePrice: req.body.purchasePrice,
+    description: req.body.description,
+    receipt: req.body.receipt,
+    nickname: req.body.nickname,
+    modelId: req.body.modelId,
+    brandId: req.body.brandId,
+    userId: req.body.userId,
+    collectionId: req.body.collectionId,
+    cutId: req.body.cutId,
+    typeId: req.body.typeId
+   })
+  .then(result => res.json(result))
+  .then(() => console.log('Shoe Created!'))
+  .catch(err => console.log(err))
+  })
+
 
 app.put('/shoes', (req, res) => {
   res.send('update shoes')
@@ -55,6 +77,89 @@ app.get('/users', (req, res) => {
   .catch(err => console.log(err))
 })
 
+app.get('/brands', (req, res) => {
+  models.Brand.findAll({})
+  .then(result => res.json(result))
+  .then(() => console.log('All Brands recieved'))
+  .catch(err => console.log(err))
+})
+
+app.post('/brands', (req, res) => {
+  models.Brand.create({
+    name: req.body.name,
+    headquarters: req.body.headquarters
+  })
+  .then(result => res.json(result))
+  .then(() => console.log('Brand Created'))
+  .catch(err => console.log(err))
+})
+
+app.get('/types', (req, res) => {
+  models.Type.findAll({})
+  .then(result => res.json(result))
+  .then(() => console.log('All Types recieved'))
+  .catch(err => console.log(err))
+})
+
+app.post('/types', (req, res) => {
+  models.Type.create({
+    name: req.body.name
+  })
+  .then(result => res.json(result))
+  .then(() => console.log('Type Created'))
+  .catch(err => console.log(err))
+})
+
+app.get('/collections', (req, res) => {
+  models.Collection.findAll({})
+  .then(result => res.json(result))
+  .then(() => console.log('All Collections recieved'))
+  .catch(err => console.log(err))
+})
+
+app.post('/collections', (req, res) => {
+  models.Collection.create({
+    name: req.body.name,
+    brandId: req.body.brandId
+  })
+  .then(result => res.json(result))
+  .then(() => console.log('Collection Created'))
+  .catch(err => console.log(err))
+})
+
+app.get('/models', (req, res) => {
+  models.Model.findAll({})
+  .then(result => res.json(result))
+  .then(() => console.log('All Models recieved'))
+  .catch(err => console.log(err))
+})
+
+app.post('/models', (req, res) => {
+  models.Model.create({
+    name: req.body.name,
+    brandId: req.body.brandId,
+    collectionId: req.body.collectionId
+  })
+  .then(result => res.json(result))
+  .then(() => console.log('Model Created'))
+  .catch(err => console.log(err))
+})
+
+app.get('/cuts', (req, res) => {
+  models.Cut.findAll({})
+  .then(result => res.json(result))
+  .then(() => console.log('All Cuts recieved'))
+  .catch(err => console.log(err))
+})
+
+app.post('/cuts', (req, res) => {
+  models.Cut.create({
+    cut: req.body.cut
+  })
+  .then(result => res.json(result))
+  .then(() => console.log('Cut Created'))
+  .catch(err => console.log(err))
+})
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Connected on port ${process.env.PORT}`)
