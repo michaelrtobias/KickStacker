@@ -26,12 +26,25 @@ app.get('/shoes', (req, res) => {
   .catch(err => console.log(err))
 })
 
+app.get('/user', (req, res) => {
+  const userId = [req.query.userId]
+  models.Shoe.findAll({
+    where: {
+      userId: userId
+    }
+  })
+  .then(result => res.json(result))
+  .then(() => console.log('All shoes recieved'))
+  .catch(err => console.log(err))
+})
+
 app.post('/shoes', (req, res) => {
   models.Shoe.create({
     name: req.body.name,
     styleCode: req.body.styleCode,
     color: req.body.color,
     size: req.body.size,
+    sizetypeId: req.body.sizetypeId,
     boxStatus: req.body.boxStatus,
     imageURL: req.body.imageURL,
     wears: req.body.wears,
@@ -44,7 +57,8 @@ app.post('/shoes', (req, res) => {
     userId: req.body.userId,
     collectionId: req.body.collectionId,
     cutId: req.body.cutId,
-    typeId: req.body.typeId
+    typeId: req.body.typeId,
+    collaborator: req.body.collaborator
    })
   .then(result => res.json(result))
   .then(() => console.log('Shoe Created!'))
@@ -158,6 +172,22 @@ app.post('/cuts', (req, res) => {
   })
   .then(result => res.json(result))
   .then(() => console.log('Cut Created'))
+  .catch(err => console.log(err))
+})
+
+app.get('/sizetypes', (req, res) => {
+  models.SizeType.findAll({})
+  .then(result => res.json(result))
+  .then(() => console.log('All sizetypes recieved'))
+  .catch(err => console.log(err))
+})
+
+app.post('/sizetypes', (req, res) => {
+  models.SizeType.create({
+    sizeType: req.body.sizeType
+  })
+  .then(result => res.json(result))
+  .then(() => console.log('Size Type Created'))
   .catch(err => console.log(err))
 })
 
