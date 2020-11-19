@@ -15,7 +15,7 @@ const Shoe = db.define('shoes', {
     allowNull: false
   },
  size: {
-   type: DataTypes.INTEGER,
+   type: DataTypes.NUMERIC,
    allowNull: false
  },
  boxStatus: {
@@ -47,6 +47,10 @@ const Shoe = db.define('shoes', {
  nickname: {
    type: DataTypes.STRING,
    allowNull: true
+ },
+ collaborator: {
+   type: DataTypes.STRING,
+   allowNull: true
  }
 })
 
@@ -63,6 +67,10 @@ const User = db.define('users', {
 
 const Brand = db.define('brands', {
   name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  headquarters: {
     type: DataTypes.STRING,
     allowNull: false
   }
@@ -89,6 +97,28 @@ const Model = db.define('models', {
   }
 })
 
+const Image = db.define('images', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  url: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  alt: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+})
+
+const SizeType = db.define('sizetype', {
+  sizeType: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+})
+
 const Cut = db.define('cuts', {
   cut: {
     type: DataTypes.STRING,
@@ -96,20 +126,34 @@ const Cut = db.define('cuts', {
   }
 })
 
+Collection.belongsTo(Brand);
+Model.belongsTo(Collection);
+Model.belongsTo(Brand);
+Shoe.belongsTo(Model);
+Shoe.belongsTo(Brand);
+Shoe.belongsTo(User);
+Shoe.belongsTo(Collection);
+Shoe.belongsTo(Cut);
+Shoe.belongsTo(Type);
+Shoe.belongsTo(SizeType);
+
+Shoe.sync({ alter: true })
+
+User.sync({ alter: true })
+
+Brand.sync({ alter: true })
+
+Type.sync({ alter: true })
+
+Collection.sync({ alter: true })
+
+SizeType.sync({ alter: true })
+
+Image.sync({ alter: true })
+
+Model.sync({ alter: true })
+
+Cut.sync({ alter: true })
 
 
-Shoe.sync()
-
-User.sync()
-
-Brand.sync()
-
-Type.sync()
-
-Collection.sync()
-
-Model.sync()
-
-Cut.sync()
-
-module.exports =  {User, Brand, Type, Collection, Model, Cut, Shoe};
+module.exports =  {User, Brand, Type, Collection, Model, Cut, Shoe, SizeType, Image};
