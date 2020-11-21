@@ -12,6 +12,7 @@ function SignIn(props) {
   const handleClick = () => {
     props.setUserId(chosenUser)
     props.setView('dashboard')
+
   }
   return (
     <div>

@@ -87,6 +87,19 @@ app.post('/users', (req, res) => {
 app.get('/users', (req, res) => {
   models.User.findAll()
   .then((user) => res.json(user))
+  .then(() => console.log('Users Recieved'))
+  .catch(err => console.log(err))
+})
+
+//get chosen user
+app.get('/users/user', (req, res) => {
+  const userId = [req.query.userId]
+  models.User.findAll({
+    where: {
+      id: userId
+    }
+  })
+  .then((user) => res.json(user))
   .then(() => console.log('User Recieved'))
   .catch(err => console.log(err))
 })
