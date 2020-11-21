@@ -1,45 +1,37 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import SignIn from './SignIn.jsx'
+import Dashboard from './Dashboard.jsx'
 
-const sampleUsers = [
-  {
-      "id": 1,
-      "firstName": "Michael",
-      "lastName": "Tobias",
-      "createdAt": "2020-11-17T06:13:19.439Z",
-      "updatedAt": "2020-11-17T06:13:19.439Z"
-  },
-  {
-      "id": 2,
-      "firstName": "Aimee",
-      "lastName": "Tobias",
-      "createdAt": "2020-11-17T06:13:29.121Z",
-      "updatedAt": "2020-11-17T06:13:29.121Z"
-  },
-  {
-      "id": 3,
-      "firstName": "William",
-      "lastName": "Tobias",
-      "createdAt": "2020-11-18T23:04:22.332Z",
-      "updatedAt": "2020-11-18T23:04:22.332Z"
-  }
-]
 
 function App() {
 
-  const [userSneakers, setUserSneakers] = useState([])
-  const [view, setView] = useState('signin')
-  // const renderView = () => {
-  //     if ({view} === 'signin') {
-  //      return  <SignIn />
-  //     }
-  //   }
-  const [users, setUsers] = useState(sampleUsers)
+  const [userSneakers, setUserSneakers] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const [view, setView] = useState('signin');
+  const [users, setUsers] = useState([])
+
+  const getAllUsers = () => {
+      axios('/users')
+      .then(res => res.data)
+      .then((users) => setUsers(users))
+      .catch(err => console.log(err))
+    }
+  useEffect(() => {
+    getAllUsers()
+  }, [])
+
+  const renderView = () => {
+        if (view === 'signin') {
+        return users.length > 0 ? <SignIn  users={users} setUserId={setUserId} setView={setView}/> : null
+        } else if (view === 'dashboard') {
+          return <Dashboard />
+        }
+      }
+
     return (
     <div>
-      <div>React is Rendered</div>
-      {/* <div>{renderView()}</div> */}
-      <SignIn  users={users}/>
+      <div>{renderView()}</div>
     </div>
     )
 }

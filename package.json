@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/michaelrtobias/KickStacker#readme",
   "dependencies": {
+    "axios": "^0.21.0",
     "babel-loader": "^8.0.0-beta.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
