@@ -34,7 +34,7 @@ app.get('/user', (req, res) => {
     }
   })
   .then(result => res.json(result))
-  .then(() => console.log('All shoes recieved'))
+  .then(() => console.log('All user shoes recieved'))
   .catch(err => console.log(err))
 })
 
