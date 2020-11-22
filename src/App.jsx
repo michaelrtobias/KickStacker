@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import SignIn from './SignIn.jsx'
 import Dashboard from './Dashboard.jsx'
-
+import AddShoe from './addShoe.jsx'
 
 function App() {
 
@@ -48,8 +48,11 @@ function App() {
           return <Dashboard getUserById={getUserById}
                             user={user}
                             userId={userId}
+                            setView={setView}
                             getUsersShoes={getUsersShoes}
                             userSneakers={userSneakers}/>
+        } else if (view === 'addshoe') {
+          return <AddShoe />
         }
       }
 

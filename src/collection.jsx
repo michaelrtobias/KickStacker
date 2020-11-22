@@ -7,7 +7,7 @@ function Collection(props) {
     <div>
       <h3>Collection</h3>
       {props.userSneakers.map(shoe =>
-        <Shoe shoe={shoe}/>
+        <Shoe shoe={shoe} key={shoe.id}/>
       )}
     </div>
   )

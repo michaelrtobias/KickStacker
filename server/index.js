@@ -138,9 +138,14 @@ app.post('/types', (req, res) => {
 })
 
 app.get('/collections', (req, res) => {
-  models.Collection.findAll({})
+  const brandId = [req.query.brandId]
+  models.Collection.findAll({
+    where: {
+      brandId: brandId
+    }
+  })
   .then(result => res.json(result))
-  .then(() => console.log('All Collections recieved'))
+  .then(() => console.log(`All Collections recieved of brand: ${brandId}`))
   .catch(err => console.log(err))
 })
 
@@ -155,7 +160,12 @@ app.post('/collections', (req, res) => {
 })
 
 app.get('/models', (req, res) => {
-  models.Model.findAll({})
+  const collectionId = [req.query.collectionId]
+  models.Model.findAll({
+    where: {
+      collectionId: collectionId
+    }
+  })
   .then(result => res.json(result))
   .then(() => console.log('All Models recieved'))
   .catch(err => console.log(err))
