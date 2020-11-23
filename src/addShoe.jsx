@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios'
 function AddShoe(props) {
 
-  const [brands, setBrands] = useState([])
-  const [brandId, setbrandId] = useState(null)
-  const [collections, setCollections] = useState([])
-  const [collectionId, setCollectionId] = useState(null)
-  const [models, setModels] = useState([])
-  const [modelId, setModelId] = useState(null)
+  const [brands, setBrands] = useState([]);
+  const [brandId, setbrandId] = useState(null);
+  const [collections, setCollections] = useState([]);
+  const [collectionId, setCollectionId] = useState(null);
+  const [models, setModels] = useState([]);
+  const [modelId, setModelId] = useState(null);
+  const [styleCode, setStyleCode] = useState('');
+  const [shoeName, setShoeName] = useState('');
+  const [shoeNickname, setShoeNickname] = useState('');
+  const [shoeColor, setShoeColor] = useState('');
+  const [shoeSize, setShoeSize] = useState(null);
+
 
   const getAllBrands = () => {
     axios('/brands')
@@ -64,6 +70,7 @@ function AddShoe(props) {
       <div>
         <label>Select A Collection </label>
         <select onChange={e => {handleCollectionChange(e)}}>
+        <option selected>Select a collection</option>
         {collections.map(collection =>
             <option value={collection.id}>{collection.name}</option>
             )}
@@ -72,10 +79,26 @@ function AddShoe(props) {
       <div>
         <label>Select A Model </label>
         <select onChange={e => {handleModelChange()}}>
+        <option selected>Select a model</option>
         {models.map(model =>
             <option value={model.id}>{model.name}</option>
             )}
         </select>
+      </div>
+      <div>
+        <input placeholder="Enter Name on Box" onChange={e => setShoeName(e.target.value)}></input>
+      </div>
+      <div>
+        <input placeholder="Enter Nickname" onChange={e => setShoeNickname(e.target.value)}></input>
+      </div>
+      <div>
+        <input placeholder="Enter Style Code" onChange={e => setStyleCode(e.target.value)}></input>
+      </div>
+      <div>
+        <input placeholder="Enter Size" onChange={e => setShoeSize(e.target.value)}></input>
+      </div>
+      <div>
+        <input placeholder="Enter Color" onChange={e => setShoeColor(e.target.value)}></input>
       </div>
     </form>
   )
