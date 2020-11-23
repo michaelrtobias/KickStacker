@@ -34,7 +34,7 @@ app.get('/user', (req, res) => {
     }
   })
   .then(result => res.json(result))
-  .then(() => console.log('All shoes recieved'))
+  .then(() => console.log('All user shoes recieved'))
   .catch(err => console.log(err))
 })
 
@@ -87,6 +87,19 @@ app.post('/users', (req, res) => {
 app.get('/users', (req, res) => {
   models.User.findAll()
   .then((user) => res.json(user))
+  .then(() => console.log('Users Recieved'))
+  .catch(err => console.log(err))
+})
+
+//get chosen user
+app.get('/users/user', (req, res) => {
+  const userId = [req.query.userId]
+  models.User.findAll({
+    where: {
+      id: userId
+    }
+  })
+  .then((user) => res.json(user))
   .then(() => console.log('User Recieved'))
   .catch(err => console.log(err))
 })
@@ -125,9 +138,14 @@ app.post('/types', (req, res) => {
 })
 
 app.get('/collections', (req, res) => {
-  models.Collection.findAll({})
+  const brandId = [req.query.brandId]
+  models.Collection.findAll({
+    where: {
+      brandId: brandId
+    }
+  })
   .then(result => res.json(result))
-  .then(() => console.log('All Collections recieved'))
+  .then(() => console.log(`All Collections recieved of brand: ${brandId}`))
   .catch(err => console.log(err))
 })
 
@@ -142,7 +160,12 @@ app.post('/collections', (req, res) => {
 })
 
 app.get('/models', (req, res) => {
-  models.Model.findAll({})
+  const collectionId = [req.query.collectionId]
+  models.Model.findAll({
+    where: {
+      collectionId: collectionId
+    }
+  })
   .then(result => res.json(result))
   .then(() => console.log('All Models recieved'))
   .catch(err => console.log(err))

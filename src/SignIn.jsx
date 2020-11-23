@@ -2,14 +2,32 @@ import React, { useEffect, useState } from "react";
 
 
 function SignIn(props) {
+
+  const [chosenUser, setChosenUser] = useState("1");
+  const handleChange = (e) => {
+    setChosenUser(e.target.value)
+
+  }
+
+  const handleClick = () => {
+    props.setUserId(chosenUser)
+    props.setView('dashboard')
+
+  }
   return (
     <div>
-    <div>SignIn is rendered</div>
-    <select name="userPicker" id="userPicker" placeholder="Pick A User">
+    <select
+      name="userPicker"
+      id="userPicker"
+      placeholder="Pick A User"
+      onChange={e => handleChange(e)}
+      // onChange={props.setUserId(e.target.value)}
+      >
       {props.users.map((user) =>
-        <option value={user.id}>{user.firstName} {user.lastName}</option>
+        <option key={user.id} value={user.id}>{user.firstName} {user.lastName}</option>
       )}
     </select>
+    <button onClick={() => handleClick()}>ENTER</button>
     </div>
   )
 }

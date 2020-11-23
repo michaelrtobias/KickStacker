@@ -1,45 +1,64 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import SignIn from './SignIn.jsx'
-
-const sampleUsers = [
-  {
-      "id": 1,
-      "firstName": "Michael",
-      "lastName": "Tobias",
-      "createdAt": "2020-11-17T06:13:19.439Z",
-      "updatedAt": "2020-11-17T06:13:19.439Z"
-  },
-  {
-      "id": 2,
-      "firstName": "Aimee",
-      "lastName": "Tobias",
-      "createdAt": "2020-11-17T06:13:29.121Z",
-      "updatedAt": "2020-11-17T06:13:29.121Z"
-  },
-  {
-      "id": 3,
-      "firstName": "William",
-      "lastName": "Tobias",
-      "createdAt": "2020-11-18T23:04:22.332Z",
-      "updatedAt": "2020-11-18T23:04:22.332Z"
-  }
-]
+import Dashboard from './Dashboard.jsx'
+import AddShoe from './addShoe.jsx'
 
 function App() {
 
-  const [userSneakers, setUserSneakers] = useState([])
-  const [view, setView] = useState('signin')
-  // const renderView = () => {
-  //     if ({view} === 'signin') {
-  //      return  <SignIn />
-  //     }
-  //   }
-  const [users, setUsers] = useState(sampleUsers)
+  const [userId, setUserId] = useState(0);
+  const [view, setView] = useState('signin');
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
+  const [userSneakers, setUserSneakers] = useState([]);
+
+  const getAllUsers = () => {
+      axios('/users')
+      .then(res => res.data)
+      .then((users) => setUsers(users))
+      .catch(err => console.log(err))
+    }
+
+  const getUserById = (id) => {
+    axios(`users/user?userId=${id}`)
+    .then(res => res.data[0])
+    .then(user => setUser(user))
+    .catch(err => console.log(err))
+  }
+
+  const getUsersShoes = () => {
+    axios(`/user?userId=${userId}`)
+    .then(res => res.data)
+    .then(shoes => setUserSneakers(shoes))
+    .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    getAllUsers()
+  }, [])
+
+  const renderView = () => {
+        if (view === 'signin') {
+        return users.length > 0 ? <SignIn
+                                      users={users}
+                                      setUserId={setUserId}
+                                      setView={setView}
+                                      getUserById={getUserById}/> : null
+        } else if (view === 'dashboard') {
+          return <Dashboard getUserById={getUserById}
+                            user={user}
+                            userId={userId}
+                            setView={setView}
+                            getUsersShoes={getUsersShoes}
+                            userSneakers={userSneakers}/>
+        } else if (view === 'addshoe') {
+          return <AddShoe />
+        }
+      }
+
     return (
     <div>
-      <div>React is Rendered</div>
-      {/* <div>{renderView()}</div> */}
-      <SignIn  users={users}/>
+      <div>{renderView()}</div>
     </div>
     )
 }
