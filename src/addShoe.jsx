@@ -71,6 +71,42 @@ function AddShoe(props) {
     .then(types => setTypes(types))
     .catch(err => console.log(err))
   }
+
+  const addShoe = () => {
+    fetch('/shoes', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: shoeName,
+        styleCode: styleCode,
+        color: shoeColor,
+        size: shoeSize,
+        sizetypeId: sizeType,
+        boxStatus: boxStatus,
+        imageURL: null,
+        wears: wears,
+        purchasePrice: purchasePrice,
+        description: description,
+        receipt: recieptStatus,
+        wears: 0,
+        nickname: shoeNickname,
+        modelId: modelId,
+        brandId: brandId,
+        userId: props.userId,
+        collectionId: collectionId,
+        cutId: shoeCut,
+        typeId: shoeType,
+        collaborator: collaborator
+      })
+    })
+    .then(res => res.json())
+    .then(() => props.getUserById(props.userId))
+    .catch(err => console.log(err))
+  }
+
   const handleCollectionChange = (e) => {
     setCollectionId(e.target.value)
     getModelsForCollection(e.target.value)
@@ -78,6 +114,11 @@ function AddShoe(props) {
 
   const handleModelChange = (e) => {
     setModelId(e.target.value)
+  }
+
+  const handleSubmit = () => {
+    addShoe()
+    props.setView('dashboard')
   }
 
   useEffect(() => {
@@ -88,6 +129,7 @@ function AddShoe(props) {
   }, [])
 
   return (
+    <div>
     <form>
       <div>Form Rendered</div>
       <div>
@@ -110,7 +152,7 @@ function AddShoe(props) {
       </div>
       <div>
         <label>Select A Model </label>
-        <select onChange={e => {handleModelChange(e)}}>
+        <select onChange={e => setModelId(e.target.value)}>
         <option value>Select a model</option>
         {models.map(model =>
             <option value={model.id}>{model.name}</option>
@@ -188,8 +230,10 @@ function AddShoe(props) {
         <label>Is the shoe  collaboration? If yes, with who?</label>
         <input onChange={e => setCollaborator(e.target.value)}></input>
       </div>
-      <button>Add Shoe</button>
+
     </form>
+     <button onClick={() => handleSubmit()}>Add Shoe</button>
+     </div>
   )
 }
 
