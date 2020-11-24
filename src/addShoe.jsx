@@ -23,7 +23,7 @@ function AddShoe(props) {
   const [collaborator, setCollaborator] = useState(null);
   const [types, setTypes] = useState([]);
   const [shoeType, setShoeType] = useState(null);
-  const [cuts, setCut] = useState([]);
+  const [cuts, setCuts] = useState([]);
   const [shoeCut, setShoeCut] = useState(null);
 
   const getAllBrands = () => {
@@ -58,6 +58,19 @@ function AddShoe(props) {
     .catch(err => console.log(err))
   }
 
+  const getAllCuts = () => {
+    axios('/cuts')
+    .then(res => res.data)
+    .then(cuts => setCuts(cuts))
+    .catch(err => console.log(err))
+  }
+
+  const getAllTypes = () => {
+    axios('/types')
+    .then(res => res.data)
+    .then(types => setTypes(types))
+    .catch(err => console.log(err))
+  }
   const handleCollectionChange = (e) => {
     setCollectionId(e.target.value)
     getModelsForCollection(e.target.value)
@@ -70,6 +83,8 @@ function AddShoe(props) {
   useEffect(() => {
     getAllBrands()
     getSizeTypes()
+    getAllTypes()
+    getAllCuts()
   }, [])
 
   return (
@@ -78,7 +93,7 @@ function AddShoe(props) {
       <div>
       <label>Select A Brand </label>
         <select onChange={e => {handleChange(e)}}>
-          <option selected>Select a brand</option>
+          <option value>Select a brand</option>
           {brands.map(brand =>
             <option value={brand.id}>{brand.name}</option>
             )}
@@ -87,7 +102,7 @@ function AddShoe(props) {
       <div>
         <label>Select A Collection </label>
         <select onChange={e => {handleCollectionChange(e)}}>
-        <option selected>Select a collection</option>
+        <option value>Select a collection</option>
         {collections.map(collection =>
             <option value={collection.id}>{collection.name}</option>
             )}
@@ -95,8 +110,8 @@ function AddShoe(props) {
       </div>
       <div>
         <label>Select A Model </label>
-        <select onChange={e => {handleModelChange()}}>
-        <option selected>Select a model</option>
+        <select onChange={e => {handleModelChange(e)}}>
+        <option value>Select a model</option>
         {models.map(model =>
             <option value={model.id}>{model.name}</option>
             )}
@@ -119,7 +134,7 @@ function AddShoe(props) {
         <label>Size:</label>
         <input placeholder="Enter Size" onChange={e => setShoeSize(e.target.value)}></input>
         <select onChange={e => setSizeType(e.target.value)}>
-        <option selected>Select a Size Type</option>
+        <option value>Size Type</option>
         {sizeTypes.map(type =>
             <option value={type.id}>{type.sizeType}</option>
             )}
@@ -130,12 +145,50 @@ function AddShoe(props) {
         <input placeholder="Enter Color" onChange={e => setShoeColor(e.target.value)}></input>
       </div>
       <div>
+        <label>What kind of shoe is it? </label>
+        <select onChange={e => setShoeType(e.target.value)}>
+          <option>Select a type of shoe</option>
+          {types.map(type =>
+            <option value={type.id}>{type.name}</option>
+            )}
+        </select>
+      </div>
+      <div>
+      <label>How high is the cut? </label>
+        <select onChange={e => setShoeCut(e.target.value)}>
+          <option>Select a cut of shoe</option>
+          {cuts.map(cut =>
+            <option value={cut.id}>{cut.cut}</option>
+            )}
+        </select>
+      </div>
+      <div>
         <label>Is there a box? :  </label>
-        <label for="boxstatus">True</label>
+        <label htmlFor="boxstatus">True</label>
         <input  type="radio" value="true" name="boxstatus" onChange={e => setBoxStatus(e.target.value)}></input>
-        <label for="boxstatus">False</label>
+        <label htmlFor="boxstatus">False</label>
         <input  type="radio" value="false" name="boxstatus" onChange={e => setBoxStatus(e.target.value)}></input>
       </div>
+      <div>
+        <label>Purchase Price: </label>
+        <input type="number" onChange={e => setPurchasePrice(e.target.value)}></input>
+      </div>
+      <div>
+          <label>Do you have the receipt?: </label>
+          <label htmlFor="receiptstatus">True</label>
+          <input type="radio" value="true" name="receiptstatus" onChange={e => setRecieptStatus(e.target.value)}></input>
+          <label htmlFor="receiptstatus">False</label>
+          <input type="radio" value="false" name="receiptstatus" onChange={e => setRecieptStatus(e.target.value)}></input>
+      </div>
+      <div>
+        <label>Description: </label>
+        <input placeholder="Optional" onChange={e => setDescription(e.target.value)}></input>
+      </div>
+      <div>
+        <label>Is the shoe  collaboration? If yes, with who?</label>
+        <input onChange={e => setCollaborator(e.target.value)}></input>
+      </div>
+      <button>Add Shoe</button>
     </form>
   )
 }
