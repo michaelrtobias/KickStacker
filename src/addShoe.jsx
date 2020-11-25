@@ -103,8 +103,8 @@ function AddShoe(props) {
       })
     })
     .then(res => res.json())
-    .then(() => props.getUserById(props.userId))
     .catch(err => console.log(err))
+    .then((shoe) => props.getUsersShoes(shoe.userId))
   }
 
   const handleCollectionChange = (e) => {
@@ -119,6 +119,7 @@ function AddShoe(props) {
   const handleSubmit = () => {
     addShoe()
     props.setView('dashboard')
+
   }
 
   useEffect(() => {
