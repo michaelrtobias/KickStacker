@@ -27,6 +27,7 @@ function AddShoe(props) {
   const [newBrand, setNewBrand] = useState("");
   const [brandHeadquarters, setBrandHeadquarters] = useState("");
   const [newCollection, setNewCollection] = useState("");
+  const [newModel, setNewModel] = useState("");
 
   const getAllBrands = () => {
     axios("/brands")
@@ -132,8 +133,8 @@ function AddShoe(props) {
       .then((res) => console.log(res.data));
   };
 
-  const createField = () => {
-    if (brandId === "create") {
+  const createBrandField = () => {
+    if (brandId === "0") {
       return (
         <div>
           <label>New Brand: </label>
@@ -164,11 +165,11 @@ function AddShoe(props) {
         name: newCollection,
         brandId: brandId,
       })
-      .then((res) => console.log(res.data));
+      .then((res) => setCollectionId(res.data.id));
   };
 
   const makeCollection = () => {
-    if (collectionId === "create") {
+    if (collectionId === "0") {
       return (
         <div>
           <label>New Collection: </label>
@@ -179,38 +180,42 @@ function AddShoe(props) {
           <button
             onClick={() => {
               createCollection();
-              getAllCollectionsForBrand(brandId);
               setCollectionId("choose");
             }}
           >
-            Create Brand
+            Create Collection
           </button>
         </div>
       );
     }
   };
 
+  const createModel = () => {
+    axios
+      .post("/models", {
+        name: newModel,
+        brandId: brandId,
+        collectionId: collectionId,
+      })
+      .then((res) => setModelId(res.data.id));
+  };
+
   const makeModel = () => {
-    if (modelId === "create") {
+    if (modelId === "0") {
       return (
         <div>
-          <label>New Brand: </label>
+          <label>New Model: </label>
           <input
-            placeholder="Enter Brand Name"
-            onChange={(e) => setNewBrand(e.target.value)}
-          ></input>
-          <input
-            placeholder="Enter Brand HQ"
-            onChange={(e) => setBrandHeadquarters(e.target.value)}
+            placeholder="Enter Model Name"
+            onChange={(e) => setNewModel(e.target.value)}
           ></input>
           <button
             onClick={() => {
-              createBrand();
-              getAllBrands();
-              setBrandId("choose");
+              createModel();
+              // setModelId(0);
             }}
           >
-            Create Brand
+            Create Model
           </button>
         </div>
       );
@@ -223,6 +228,13 @@ function AddShoe(props) {
     getAllCuts();
   }, []);
 
+  useEffect(() => {
+    getAllCollectionsForBrand(brandId || 0);
+  }, [collectionId]);
+
+  useEffect(() => {
+    getModelsForCollection(collectionId || 0);
+  }, [modelId]);
   return (
     <div>
       <div>
@@ -233,12 +245,12 @@ function AddShoe(props) {
           }}
         >
           <option value>Select a brand</option>
-          <option value="create">Create A New Brand</option>
+          <option value="0">Create A New Brand</option>
           {brands.map((brand) => (
             <option value={brand.id}>{brand.name}</option>
           ))}
         </select>
-        <div>{createField()}</div>
+        <div>{createBrandField()}</div>
       </div>
       <div>
         <label>Select A Collection </label>
@@ -248,7 +260,7 @@ function AddShoe(props) {
           }}
         >
           <option value>Select a collection</option>
-          <option value="create">Create A New Collection</option>
+          <option value="0">Create A New Collection</option>
           {collections.map((collection) => (
             <option value={collection.id}>{collection.name}</option>
           ))}
@@ -259,11 +271,12 @@ function AddShoe(props) {
         <label>Select A Model </label>
         <select onChange={(e) => setModelId(e.target.value)}>
           <option value>Select a model</option>
-          <option value="create">Create A New Model</option>
+          <option value="0">Create A New Model</option>
           {models.map((model) => (
             <option value={model.id}>{model.name}</option>
           ))}
         </select>
+        <div>{makeModel()}</div>
       </div>
       <div>
         <label>Name on Box:</label>
