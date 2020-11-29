@@ -352,3 +352,5 @@ MigrationBackup/
 .env
 
 bundle.js
+
+*.pem
