@@ -52,7 +52,9 @@ function App() {
                             getUsersShoes={getUsersShoes}
                             userSneakers={userSneakers}/>
         } else if (view === 'addshoe') {
-          return <AddShoe />
+          return <AddShoe setView={setView}
+                          userId={userId}
+                          getUsersShoes={getUsersShoes}/>
         }
       }
 

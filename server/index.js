@@ -1,44 +1,43 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const dotenv = require('dotenv').config()
-const path = require('path');
-const bodyParser = require('body-parser')
-app.use(bodyParser.json())
+const dotenv = require("dotenv").config();
+const path = require("path");
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 // const db = require('../db/index.js');
-const db = require('../db/controllers/users.js');
-const models = require('../db/models.js')
+const db = require("../db/controllers/users.js");
+const models = require("../db/models.js");
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, "../public")));
 
-app.use(express.static(path.join(__dirname, '../public')))
-
-app.get('/', (req, res) => {
-  res.send('Gotta Catch \'Em All')
-})
+app.get("/", (req, res) => {
+  res.send("Gotta Catch 'Em All");
+});
 
 // get all shoes
-app.get('/shoes', (req, res) => {
+app.get("/shoes", (req, res) => {
   models.Shoe.findAll({})
-  .then(result => res.json(result))
-  .then(() => console.log('All shoes recieved'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("All shoes recieved"))
+    .catch((err) => console.log(err));
+});
 
-app.get('/user', (req, res) => {
-  const userId = [req.query.userId]
+app.get("/user", (req, res) => {
+  const userId = [req.query.userId];
   models.Shoe.findAll({
     where: {
-      userId: userId
-    }
+      userId: userId,
+    },
   })
-  .then(result => res.json(result))
-  .then(() => console.log('All user shoes recieved'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("All user shoes recieved"))
+    .catch((err) => console.log(err));
+});
 
-app.post('/shoes', (req, res) => {
+app.post("/shoes", (req, res) => {
   models.Shoe.create({
     name: req.body.name,
     styleCode: req.body.styleCode,
@@ -58,162 +57,160 @@ app.post('/shoes', (req, res) => {
     collectionId: req.body.collectionId,
     cutId: req.body.cutId,
     typeId: req.body.typeId,
-    collaborator: req.body.collaborator
-   })
-  .then(result => res.json(result))
-  .then(() => console.log('Shoe Created!'))
-  .catch(err => console.log(err))
+    collaborator: req.body.collaborator,
   })
+    .then((result) => res.json(result))
+    .then(() => console.log("Shoe Created!"))
+    .catch((err) => console.log(err));
+});
 
+app.put("/shoes", (req, res) => {
+  res.send("update shoes");
+});
 
-app.put('/shoes', (req, res) => {
-  res.send('update shoes')
-})
+app.delete("/shoes", (req, res) => {
+  res.send("delete shoes");
+});
 
-app.delete('/shoes', (req, res) => {
-  res.send('delete shoes')
-})
-
-
-app.post('/users', (req, res) => {
+app.post("/users", (req, res) => {
   models.User.create({
     firstName: req.body.firstName,
-    lastName: req.body.lastName
+    lastName: req.body.lastName,
   })
-  .then(result => res.json(result))
-  .catch(err => console.log(err))
-  .then(() => console.log('User Created'))
-})
-app.get('/users', (req, res) => {
+    .then((result) => res.json(result))
+    .catch((err) => console.log(err))
+    .then(() => console.log("User Created"));
+});
+app.get("/users", (req, res) => {
   models.User.findAll()
-  .then((user) => res.json(user))
-  .then(() => console.log('Users Recieved'))
-  .catch(err => console.log(err))
-})
+    .then((user) => res.json(user))
+    .then(() => console.log("Users Recieved"))
+    .catch((err) => console.log(err));
+});
 
 //get chosen user
-app.get('/users/user', (req, res) => {
-  const userId = [req.query.userId]
+app.get("/users/user", (req, res) => {
+  const userId = [req.query.userId];
   models.User.findAll({
     where: {
-      id: userId
-    }
+      id: userId,
+    },
   })
-  .then((user) => res.json(user))
-  .then(() => console.log('User Recieved'))
-  .catch(err => console.log(err))
-})
+    .then((user) => res.json(user))
+    .then(() => console.log("User Recieved"))
+    .catch((err) => console.log(err));
+});
 
-app.get('/brands', (req, res) => {
+app.get("/brands", (req, res) => {
   models.Brand.findAll({})
-  .then(result => res.json(result))
-  .then(() => console.log('All Brands recieved'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("All Brands recieved"))
+    .catch((err) => console.log(err));
+});
 
-app.post('/brands', (req, res) => {
+app.post("/brands", (req, res) => {
   models.Brand.create({
     name: req.body.name,
-    headquarters: req.body.headquarters
+    headquarters: req.body.headquarters,
   })
-  .then(result => res.json(result))
-  .then(() => console.log('Brand Created'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("Brand Created"))
+    .catch((err) => console.log(err));
+});
 
-app.get('/types', (req, res) => {
+app.get("/types", (req, res) => {
   models.Type.findAll({})
-  .then(result => res.json(result))
-  .then(() => console.log('All Types recieved'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("All Types recieved"))
+    .catch((err) => console.log(err));
+});
 
-app.post('/types', (req, res) => {
+app.post("/types", (req, res) => {
   models.Type.create({
-    name: req.body.name
+    name: req.body.name,
   })
-  .then(result => res.json(result))
-  .then(() => console.log('Type Created'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("Type Created"))
+    .catch((err) => console.log(err));
+});
 
-app.get('/collections', (req, res) => {
-  const brandId = [req.query.brandId]
+app.get("/collections", (req, res) => {
+  const brandId = [req.query.brandId];
   models.Collection.findAll({
     where: {
-      brandId: brandId
-    }
+      brandId: brandId,
+    },
   })
-  .then(result => res.json(result))
-  .then(() => console.log(`All Collections recieved of brand: ${brandId}`))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log(`All Collections recieved of brand: ${brandId}`))
+    .catch((err) => console.log(err));
+});
 
-app.post('/collections', (req, res) => {
+app.post("/collections", (req, res) => {
   models.Collection.create({
     name: req.body.name,
-    brandId: req.body.brandId
+    brandId: req.body.brandId,
   })
-  .then(result => res.json(result))
-  .then(() => console.log('Collection Created'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("Collection Created"))
+    .catch((err) => console.log(err));
+});
 
-app.get('/models', (req, res) => {
-  const collectionId = [req.query.collectionId]
+app.get("/models", (req, res) => {
+  const collectionId = [req.query.collectionId];
   models.Model.findAll({
     where: {
-      collectionId: collectionId
-    }
+      collectionId: collectionId,
+    },
   })
-  .then(result => res.json(result))
-  .then(() => console.log('All Models recieved'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("All Models recieved"))
+    .catch((err) => console.log(err));
+});
 
-app.post('/models', (req, res) => {
+app.post("/models", (req, res) => {
   models.Model.create({
     name: req.body.name,
     brandId: req.body.brandId,
-    collectionId: req.body.collectionId
+    collectionId: req.body.collectionId,
   })
-  .then(result => res.json(result))
-  .then(() => console.log('Model Created'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("Model Created"))
+    .catch((err) => console.log(err));
+});
 
-app.get('/cuts', (req, res) => {
+app.get("/cuts", (req, res) => {
   models.Cut.findAll({})
-  .then(result => res.json(result))
-  .then(() => console.log('All Cuts recieved'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("All Cuts recieved"))
+    .catch((err) => console.log(err));
+});
 
-app.post('/cuts', (req, res) => {
+app.post("/cuts", (req, res) => {
   models.Cut.create({
-    cut: req.body.cut
+    cut: req.body.cut,
   })
-  .then(result => res.json(result))
-  .then(() => console.log('Cut Created'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("Cut Created"))
+    .catch((err) => console.log(err));
+});
 
-app.get('/sizetypes', (req, res) => {
+app.get("/sizetypes", (req, res) => {
   models.SizeType.findAll({})
-  .then(result => res.json(result))
-  .then(() => console.log('All sizetypes recieved'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("All sizetypes recieved"))
+    .catch((err) => console.log(err));
+});
 
-app.post('/sizetypes', (req, res) => {
+app.post("/sizetypes", (req, res) => {
   models.SizeType.create({
-    sizeType: req.body.sizeType
+    sizeType: req.body.sizeType,
   })
-  .then(result => res.json(result))
-  .then(() => console.log('Size Type Created'))
-  .catch(err => console.log(err))
-})
+    .then((result) => res.json(result))
+    .then(() => console.log("Size Type Created"))
+    .catch((err) => console.log(err));
+});
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`Connected on port ${process.env.PORT}`)
-})
+  console.log(`Connected on port ${process.env.PORT}`);
+});
