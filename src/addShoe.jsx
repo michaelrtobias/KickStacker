@@ -180,7 +180,7 @@ function AddShoe(props) {
           <button
             onClick={() => {
               createCollection();
-              setCollectionId("choose");
+              // setCollectionId("choose");
             }}
           >
             Create Collection
