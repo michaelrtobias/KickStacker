@@ -1,59 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("./index.js");
 
-const Shoe = db.define("shoes", {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  styleCode: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  color: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  size: {
-    type: DataTypes.NUMERIC,
-    allowNull: false,
-  },
-  boxStatus: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-  },
-  imageURL: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  wears: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 0,
-  },
-  purchasePrice: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    defaultValue: 0,
-  },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  receipt: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-  },
-  nickname: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  collaborator: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-});
-
 const User = db.define("users", {
   firstName: {
     type: DataTypes.STRING,
@@ -126,6 +73,59 @@ const Cut = db.define("cuts", {
   },
 });
 
+const Shoe = db.define("shoes", {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  styleCode: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  color: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  size: {
+    type: DataTypes.NUMERIC,
+    allowNull: false,
+  },
+  boxStatus: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+  },
+  imageURL: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  wears: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  },
+  purchasePrice: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    defaultValue: 0,
+  },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  receipt: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+  },
+  nickname: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  collaborator: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+});
+
 Collection.belongsTo(Brand);
 Model.belongsTo(Collection);
 Model.belongsTo(Brand);
@@ -136,8 +136,6 @@ Shoe.belongsTo(Collection);
 Shoe.belongsTo(Cut);
 Shoe.belongsTo(Type);
 Shoe.belongsTo(SizeType);
-
-Shoe.sync({ alter: true });
 
 User.sync({ alter: true });
 
@@ -154,6 +152,8 @@ Image.sync({ alter: true });
 Model.sync({ alter: true });
 
 Cut.sync({ alter: true });
+
+Shoe.sync({ alter: true });
 
 module.exports = {
   User,
