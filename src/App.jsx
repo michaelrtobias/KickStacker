@@ -3,6 +3,14 @@ import axios from "axios";
 import SignIn from "./SignIn.jsx";
 import Dashboard from "./dashboard.jsx";
 import AddShoe from "./addShoe.jsx";
+import styled from "styled-components";
+
+const Background = styled.div`
+  background-color: #ffbf80;
+  display: flex;
+  justify-content: center;
+  border: 3px solid black;
+`;
 
 function App() {
   const [userId, setUserId] = useState(0);
@@ -69,9 +77,9 @@ function App() {
   };
 
   return (
-    <div>
+    <Background>
       <div>{renderView()}</div>
-    </div>
+    </Background>
   );
 }
 

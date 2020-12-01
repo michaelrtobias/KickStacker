@@ -1,4 +1,11 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+const ShoeBox = styled.div`
+  background-color: #ffd9b3;
+  padding: 20px;
+  border: 5px solid black;
+  margin: 5px 0px 5px 0px;
+`;
 
 function Shoe(props) {
   const sizeType = (string) => {
@@ -16,7 +23,7 @@ function Shoe(props) {
   };
 
   return (
-    <div>
+    <ShoeBox>
       <div>
         {props.shoe.name} - {props.shoe.nickname}
       </div>
@@ -24,7 +31,7 @@ function Shoe(props) {
         Size: {props.shoe.size} {sizeType(props.shoe.sizetypeId)}{" "}
         {props.shoe.styleCode}
       </div>
-    </div>
+    </ShoeBox>
   );
 }
 

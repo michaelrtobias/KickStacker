@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Collection from "./collection.jsx";
+import styled from "styled-components";
 
 function Dashboard(props) {
   const handleClickAddShoe = () => {

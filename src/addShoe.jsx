@@ -390,6 +390,7 @@ function AddShoe(props) {
         <input onChange={(e) => setCollaborator(e.target.value)}></input>
       </div>
       <button onClick={() => handleSubmit()}>Add Shoe</button>
+      <button onClick={() => props.setView("dashboard")}>Cancel</button>
     </div>
   );
 }
