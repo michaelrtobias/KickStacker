@@ -247,7 +247,9 @@ function AddShoe(props) {
           <option value>Select a brand</option>
           <option value="0">Create A New Brand</option>
           {brands.map((brand) => (
-            <option value={brand.id}>{brand.name}</option>
+            <option key={brand.id} value={brand.id}>
+              {brand.name}
+            </option>
           ))}
         </select>
         <div>{createBrandField()}</div>
@@ -262,7 +264,9 @@ function AddShoe(props) {
           <option value>Select a collection</option>
           <option value="0">Create A New Collection</option>
           {collections.map((collection) => (
-            <option value={collection.id}>{collection.name}</option>
+            <option key={collection.id} value={collection.id}>
+              {collection.name}
+            </option>
           ))}
         </select>
         <div>{makeCollection()}</div>
@@ -273,7 +277,9 @@ function AddShoe(props) {
           <option value>Select a model</option>
           <option value="0">Create A New Model</option>
           {models.map((model) => (
-            <option value={model.id}>{model.name}</option>
+            <option key={model.id} value={model.id}>
+              {model.name}
+            </option>
           ))}
         </select>
         <div>{makeModel()}</div>
@@ -308,7 +314,9 @@ function AddShoe(props) {
         <select onChange={(e) => setSizeType(e.target.value)}>
           <option value>Size Type</option>
           {sizeTypes.map((type) => (
-            <option value={type.id}>{type.sizeType}</option>
+            <option key={type.id} value={type.id}>
+              {type.sizeType}
+            </option>
           ))}
         </select>
       </div>
@@ -324,7 +332,9 @@ function AddShoe(props) {
         <select onChange={(e) => setShoeType(e.target.value)}>
           <option>Select a type of shoe</option>
           {types.map((type) => (
-            <option value={type.id}>{type.name}</option>
+            <option key={type.id} value={type.id}>
+              {type.name}
+            </option>
           ))}
         </select>
       </div>
@@ -333,7 +343,9 @@ function AddShoe(props) {
         <select onChange={(e) => setShoeCut(e.target.value)}>
           <option>Select a cut of shoe</option>
           {cuts.map((cut) => (
-            <option value={cut.id}>{cut.cut}</option>
+            <option key={cut.id} value={cut.id}>
+              {cut.cut}
+            </option>
           ))}
         </select>
       </div>
@@ -390,6 +402,7 @@ function AddShoe(props) {
         <input onChange={(e) => setCollaborator(e.target.value)}></input>
       </div>
       <button onClick={() => handleSubmit()}>Add Shoe</button>
+      <button onClick={() => props.setView("dashboard")}>Cancel</button>
     </div>
   );
 }
