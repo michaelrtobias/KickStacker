@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+const SignInWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
 
 function SignIn(props) {
   const [chosenUser, setChosenUser] = useState("");
@@ -50,13 +57,13 @@ function SignIn(props) {
   };
 
   return (
-    <div>
+    <SignInWrapper>
       <select
         name="userPicker"
         id="userPicker"
         placeholder="Pick A User"
         onChange={(e) => handleChange(e)}
-        // onChange={props.setUserId(e.target.value)}
+        required
       >
         <option value>Select A User</option>
         <option value="0">Create A New User</option>
@@ -68,7 +75,7 @@ function SignIn(props) {
       </select>
       <div>{makeUser()}</div>
       <button onClick={() => handleClick()}>ENTER</button>
-    </div>
+    </SignInWrapper>
   );
 }
 
