@@ -52,6 +52,7 @@ function App() {
           setUserId={setUserId}
           setView={setView}
           getUserById={getUserById}
+          getAllUsers={getAllUsers}
         />
       ) : null;
     } else if (view === "dashboard") {
