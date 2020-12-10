@@ -229,6 +229,10 @@ function AddShoe(props) {
   }, []);
 
   useEffect(() => {
+    getAllBrands();
+  }, [brandId]);
+
+  useEffect(() => {
     getAllCollectionsForBrand(brandId || 0);
   }, [collectionId]);
 

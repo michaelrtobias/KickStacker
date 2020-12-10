@@ -354,3 +354,5 @@ MigrationBackup/
 bundle.js
 
 *.pem
+
+.DS_Store
