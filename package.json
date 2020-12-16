@@ -31,6 +31,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "sequelize": "^6.3.5",
+    "stockx-api": "^1.0.9",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
