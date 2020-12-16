@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import UploadImage from "./uploadImage.jsx";
 function AddShoe(props) {
   const [brands, setBrands] = useState([]);
   const [brandId, setBrandId] = useState(null);
@@ -405,6 +406,9 @@ function AddShoe(props) {
         <label>Is the shoe collaboration? If yes, with who?</label>
         <input onChange={(e) => setCollaborator(e.target.value)}></input>
       </div>
+
+      <UploadImage />
+
       <button onClick={() => handleSubmit()}>Add Shoe</button>
       <button onClick={() => props.setView("dashboard")}>Cancel</button>
     </div>
