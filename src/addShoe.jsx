@@ -90,7 +90,7 @@ function AddShoe(props) {
         size: shoeSize,
         sizetypeId: sizeType,
         boxStatus: boxStatus,
-        imageURL: null,
+        imageId: 2,
         wears: wears,
         purchasePrice: purchasePrice,
         description: description,
