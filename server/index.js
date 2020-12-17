@@ -211,6 +211,24 @@ app.post("/sizetypes", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.post("/images", (req, res) => {
+  models.Image.create({
+    name: req.body.name,
+    url: req.body.url,
+    alt: req.body.alt,
+  })
+    .then((result) => res.json(result))
+    .then(() => console.log("Image Saved"))
+    .catch((err) => console.log(err));
+});
+
+app.get("/images", (req, res) => {
+  models.Image.findAll({})
+    .then((result) => res.json(result))
+    .then(() => console.log("All Imgaes Recieved"))
+    .catch((err) => console.log(err));
+});
+
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Connected on port ${process.env.PORT}`);
 });

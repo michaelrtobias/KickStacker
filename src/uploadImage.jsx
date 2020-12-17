@@ -18,6 +18,7 @@ function UploadImage(props) {
       <label>Upload A Photo</label>
       <button onClick={() => setUploadClicked(true)}>Upload</button>
       {uploadOptions()}
+      <img src="https://shoesstacker.s3.amazonaws.com/air-max-1-OG.jpg"></img>
     </div>
   );
 }
