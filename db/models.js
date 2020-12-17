@@ -64,6 +64,10 @@ const SizeType = db.define("sizetype", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  symbol: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 const Cut = db.define("cuts", {

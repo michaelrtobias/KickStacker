@@ -6,6 +6,13 @@ const ShoeBox = styled.div`
   border: 5px solid black;
   margin: 5px 0px 5px 0px;
 `;
+const ShoeText = styled.div`
+  text-align: left;
+`;
+
+const ShoePic = styled.img`
+  border-radius: 25%;
+`;
 
 function Shoe(props) {
   const sizeType = (string) => {
@@ -24,13 +31,16 @@ function Shoe(props) {
 
   return (
     <ShoeBox>
-      <div>
-        {props.shoe.name} - {props.shoe.nickname}
-      </div>
-      <div>
-        Size: {props.shoe.size} {sizeType(props.shoe.sizetypeId)}{" "}
-        {props.shoe.styleCode}
-      </div>
+      <ShoePic src={props.shoe.image.url} alt={props.shoe.image.alt}></ShoePic>
+      <ShoeText>
+        <div>
+          {props.shoe.name} - {props.shoe.nickname}
+        </div>
+        <div>
+          Size: {props.shoe.size} {props.shoe.sizetype.symbol}{" "}
+          {props.shoe.styleCode}
+        </div>
+      </ShoeText>
     </ShoeBox>
   );
 }
