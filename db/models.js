@@ -94,10 +94,6 @@ const Shoe = db.define("shoes", {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
-  imageURL: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
   wears: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -136,6 +132,7 @@ Shoe.belongsTo(Collection);
 Shoe.belongsTo(Cut);
 Shoe.belongsTo(Type);
 Shoe.belongsTo(SizeType);
+Shoe.belongsTo(Image);
 
 User.sync({ alter: true });
 
