@@ -90,7 +90,7 @@ function AddShoe(props) {
         size: shoeSize,
         sizetypeId: sizeType,
         boxStatus: boxStatus,
-        imageId: 2,
+        imageId: 3,
         wears: wears,
         purchasePrice: purchasePrice,
         description: description,
@@ -396,7 +396,7 @@ function AddShoe(props) {
         ></input>
       </div>
       <div>
-        <label>Description: </label>
+        <label>Description/Comments: </label>
         <input
           placeholder="Optional"
           onChange={(e) => setDescription(e.target.value)}

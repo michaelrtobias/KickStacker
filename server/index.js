@@ -31,6 +31,32 @@ app.get("/user", (req, res) => {
     where: {
       userId: userId,
     },
+    include: [
+      {
+        model: models.Image,
+      },
+      {
+        model: models.Model,
+      },
+      {
+        model: models.Brand,
+      },
+      {
+        model: models.User,
+      },
+      {
+        model: models.Collection,
+      },
+      {
+        model: models.Cut,
+      },
+      {
+        model: models.Type,
+      },
+      {
+        model: models.SizeType,
+      },
+    ],
   })
     .then((result) => res.json(result))
     .then(() => console.log("All user shoes recieved"))
