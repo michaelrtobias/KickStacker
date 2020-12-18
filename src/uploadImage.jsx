@@ -7,7 +7,7 @@ function UploadImage(props) {
     if (uploadClicked === true) {
       return (
         <div>
-          <button>From Device</button>
+          <input type="file"></input>
           <button>Take Picture</button>
         </div>
       );

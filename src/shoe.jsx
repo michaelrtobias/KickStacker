@@ -5,34 +5,29 @@ const ShoeBox = styled.div`
   padding: 20px;
   border: 5px solid black;
   margin: 5px 0px 5px 0px;
+  display: flex;
+  flex-direction: row;
 `;
 const ShoeText = styled.div`
   text-align: left;
+  padding: 8% 0px 0px 24px;
+  position: relative;
 `;
 
 const ShoePic = styled.img`
   border-radius: 25%;
+  max-height: 150px;
+  max-width: 200px;
 `;
 
 function Shoe(props) {
-  const sizeType = (string) => {
-    if (string === 1) {
-      return "M";
-    } else if (string === 2) {
-      return "W";
-    } else if (string === 3 || string === 4 || string === 5) {
-      return "y";
-    } else if (string === 6 || string === 7) {
-      return "c";
-    } else {
-      return "type";
-    }
-  };
-
   return (
     <ShoeBox>
       <ShoePic src={props.shoe.image.url} alt={props.shoe.image.alt}></ShoePic>
       <ShoeText>
+        <div>
+          {props.shoe.brand.name} - {props.shoe.model.name}
+        </div>
         <div>
           {props.shoe.name} - {props.shoe.nickname}
         </div>
