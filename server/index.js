@@ -277,16 +277,16 @@ app.post("/upload/image", (req, res) => {
     ACL: "public-read",
   };
 
-  const returnedData = {
-    signedRequest: data,
-    url: `https://${S3_Bucket}.s3.amazon.aws.com/${fileName}`,
-  };
   s3.getSignedUrl("putObject", s3Params, (err, url) => {
     if (err) {
       throw err;
     } else {
+      const returnData = {
+        signedRequest: url,
+        url: `https://${S3_Bucket}.s3.amazon.aws.com/${fileName}`,
+      };
       console.log("URL Created");
-      res.json({ success: true, data: { returnedData } });
+      res.json({ success: true, data: { returnData } });
     }
   });
   res.send("this thing works");
