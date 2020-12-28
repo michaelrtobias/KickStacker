@@ -9,31 +9,32 @@ function UploadImage(props) {
   const [uploadInput, setUploadInput] = useState("");
 
   const uploadImage = () => {
-    let file = uploadInput.files[0];
+    var file = uploadInput.files[0];
     console.log("file:");
     console.log(file);
-    let fileParts = uploadInput.files[0].name.split(".");
+    var fileParts = uploadInput.files[0].name.split(".");
     console.log("file parts: " + fileParts);
-    let fileName = fileParts[0];
+    var fileName = fileParts[0];
     console.log("filename: " + fileName);
-    let fileType = fileParts[1];
+    var fileType = fileParts[1];
     console.log("file type: " + fileType);
 
     console.log("Preparing the upload");
     axios
       .post("/upload/image", {
-        fileName: fileName,
-        fileType: fileType,
+        fileName: file.name,
+        fileType: file.type,
       })
       .then((response) => {
-        var returnData = response.data.data.returnData;
+        debugger;
+        var returnedData = response.data.data.returnData;
         var signedRequest = returnedData.signedRequest;
         var url = returnedData.url;
         setUrl(url);
         console.log("Recieved a signed request " + signedRequest);
         var options = {
           headers: {
-            "Content-Type": fileType,
+            "Content-Type": file.type,
           },
         };
         axios
@@ -43,11 +44,11 @@ function UploadImage(props) {
             setSuccess(true);
           })
           .catch((error) => {
-            alert("ERROR " + JSON.stringify(error));
+            throw err;
           });
       })
-      .catch((error) => {
-        alert(JSON.stringify(error));
+      .catch((err) => {
+        throw err;
       });
   };
 

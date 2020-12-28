@@ -271,7 +271,7 @@ app.post("/upload/image", (req, res) => {
   const fileType = req.body.fileType;
   const s3Params = {
     Bucket: S3_Bucket,
-    key: fileName,
+    Key: fileName,
     Expires: 500,
     ContentType: fileType,
     ACL: "public-read",
@@ -281,6 +281,7 @@ app.post("/upload/image", (req, res) => {
     if (err) {
       throw err;
     } else {
+      debugger;
       const returnData = {
         signedRequest: url,
         url: `https://${S3_Bucket}.s3.amazon.aws.com/${fileName}`,
@@ -289,7 +290,7 @@ app.post("/upload/image", (req, res) => {
       res.json({ success: true, data: { returnData } });
     }
   });
-  res.send("this thing works");
+  // res.send("this thing works");
 });
 
 app.listen(process.env.PORT || 3000, () => {
