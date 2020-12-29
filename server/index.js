@@ -289,7 +289,6 @@ app.post("/upload/image", (req, res) => {
       res.json({ success: true, data: { returnData } });
     }
   });
-  // res.send("this thing works");
 });
 
 app.listen(process.env.PORT || 3000, () => {

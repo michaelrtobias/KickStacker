@@ -7,7 +7,6 @@ function UploadImage(props) {
   const [URL, setUrl] = useState("");
   const [success, setSuccess] = useState(false);
   const [uploadInput, setUploadInput] = useState("");
-  // const S3_Bucket = process.env.Bucket;
 
   const uploadImage = () => {
     var file = uploadInput.files[0];
@@ -67,22 +66,6 @@ function UploadImage(props) {
       });
   };
 
-  // const uploadOptions = () => {
-  //   if (uploadClicked === true) {
-  //     return (
-  //       <div>
-  //         <input
-  //           type="file"
-  //           onChange={setUploadedFile}
-  //           ref={(ref) => {
-  //             this.uploadInput = ref;
-  //           }}
-  //         ></input>
-  //         <button>Take Picture</button>
-  //       </div>
-  //     );
-  //   }
-  // };
   const handleChange = () => {
     setSuccess(false);
     setUrl("");
@@ -90,8 +73,6 @@ function UploadImage(props) {
   return (
     <div>
       <label>Upload A Photo</label>
-      {/* <button onClick={() => setUploadClicked(true)}>Upload</button> */}
-      {/* {uploadOptions()} */}
       <input
         type="file"
         ref={(ref) => {
