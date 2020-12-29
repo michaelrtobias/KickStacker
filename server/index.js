@@ -72,7 +72,6 @@ app.post("/shoes", (req, res) => {
     size: req.body.size,
     sizetypeId: req.body.sizetypeId,
     boxStatus: req.body.boxStatus,
-    imageURL: req.body.imageURL,
     wears: req.body.wears,
     purchasePrice: req.body.purchasePrice,
     description: req.body.description,
@@ -284,7 +283,7 @@ app.post("/upload/image", (req, res) => {
       debugger;
       const returnData = {
         signedRequest: url,
-        url: `https://${S3_Bucket}.s3.amazon.aws.com/${fileName}`,
+        url: `https://${S3_Bucket}.s3.amazonaws.com/${fileName}`,
       };
       console.log("URL Created");
       res.json({ success: true, data: { returnData } });

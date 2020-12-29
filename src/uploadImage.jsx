@@ -4,9 +4,10 @@ import axios from "axios";
 function UploadImage(props) {
   const [uploadClicked, setUploadClicked] = useState(false);
   const [uploadedFile, setUploadedFile] = useState("");
-  const [url, setUrl] = useState("");
+  const [URL, setUrl] = useState("");
   const [success, setSuccess] = useState(false);
   const [uploadInput, setUploadInput] = useState("");
+  // const S3_Bucket = process.env.Bucket;
 
   const uploadImage = () => {
     var file = uploadInput.files[0];
@@ -26,7 +27,6 @@ function UploadImage(props) {
         fileType: file.type,
       })
       .then((response) => {
-        debugger;
         var returnedData = response.data.data.returnData;
         var signedRequest = returnedData.signedRequest;
         var url = returnedData.url;
@@ -44,6 +44,21 @@ function UploadImage(props) {
             setSuccess(true);
           })
           .catch((error) => {
+            throw err;
+          });
+      })
+      .then((response) => {
+        axios
+          .post("/images", {
+            name: file.name,
+            url: `https://shoesstacker.s3.amazonaws.com/${file.name}`,
+            alt: fileName,
+          })
+          .then((res) => {
+            props.setImageId(res.data.id);
+          })
+          .then(() => console.log("Image Stored in DB"))
+          .catch((err) => {
             throw err;
           });
       })
