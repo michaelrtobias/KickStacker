@@ -29,6 +29,7 @@ function AddShoe(props) {
   const [brandHeadquarters, setBrandHeadquarters] = useState("");
   const [newCollection, setNewCollection] = useState("");
   const [newModel, setNewModel] = useState("");
+  const [imageId, setImageId] = useState(null);
 
   const getAllBrands = () => {
     axios("/brands")
@@ -90,7 +91,7 @@ function AddShoe(props) {
         size: shoeSize,
         sizetypeId: sizeType,
         boxStatus: boxStatus,
-        imageURL: null,
+        imageId: imageId,
         wears: wears,
         purchasePrice: purchasePrice,
         description: description,
@@ -396,7 +397,7 @@ function AddShoe(props) {
         ></input>
       </div>
       <div>
-        <label>Description: </label>
+        <label>Description/Comments: </label>
         <input
           placeholder="Optional"
           onChange={(e) => setDescription(e.target.value)}
@@ -407,7 +408,7 @@ function AddShoe(props) {
         <input onChange={(e) => setCollaborator(e.target.value)}></input>
       </div>
 
-      <UploadImage />
+      <UploadImage setImageId={setImageId} />
 
       <button onClick={() => handleSubmit()}>Add Shoe</button>
       <button onClick={() => props.setView("dashboard")}>Cancel</button>

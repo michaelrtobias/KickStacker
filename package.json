@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js -w"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/michaelrtobias/KickStacker#readme",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.0.0",
+    "aws-sdk": "^2.814.0",
     "axios": "^0.21.0",
     "babel-loader": "^8.0.0-beta.0",
     "body-parser": "^1.19.0",

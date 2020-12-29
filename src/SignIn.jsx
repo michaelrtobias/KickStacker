@@ -65,7 +65,7 @@ function SignIn(props) {
         onChange={(e) => handleChange(e)}
         required
       >
-        <option value>Select A User</option>
+        <option>Select A User</option>
         <option value="0">Create A New User</option>
         {props.users.map((user) => (
           <option key={user.id} value={user.id}>

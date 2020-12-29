@@ -5,32 +5,52 @@ const ShoeBox = styled.div`
   padding: 20px;
   border: 5px solid black;
   margin: 5px 0px 5px 0px;
+  display: flex;
+  flex-direction: row;
+`;
+const ShoeText = styled.div`
+  text-align: left;
+  padding: 8% 0px 0px 24px;
+  position: relative;
+`;
+
+const ShoePic = styled.img`
+  border-radius: 25%;
+  max-height: 150px;
+  max-width: 200px;
 `;
 
 function Shoe(props) {
-  const sizeType = (string) => {
-    if (string === 1) {
-      return "M";
-    } else if (string === 2) {
-      return "W";
-    } else if (string === 3 || string === 4 || string === 5) {
-      return "y";
-    } else if (string === 6 || string === 7) {
-      return "c";
-    } else {
-      return "type";
-    }
-  };
+  const [shoeURL, setShoeURL] = useState("");
+
+  // const authorizeImage = () => {
+  //   fetch(props.shoe.image.url, {
+  //     "x-amz-server-side-encryption": "AES256",
+  //   })
+  //     .then((res) => res.blob())
+  //     .then(() => console.log("shoe image unlocked"))
+  //     .then((blob) => setShoeURL(URL.createObjectURL(blob)));
+  // };
+
+  // useEffect(() => {
+  //   authorizeImage();
+  // }, []);
 
   return (
     <ShoeBox>
-      <div>
-        {props.shoe.name} - {props.shoe.nickname}
-      </div>
-      <div>
-        Size: {props.shoe.size} {sizeType(props.shoe.sizetypeId)}{" "}
-        {props.shoe.styleCode}
-      </div>
+      <ShoePic src={props.shoe.image.url} alt={props.shoe.image.alt}></ShoePic>
+      <ShoeText>
+        <div>
+          {props.shoe.brand.name} - {props.shoe.model.name}
+        </div>
+        <div>
+          {props.shoe.name} - {props.shoe.nickname}
+        </div>
+        <div>
+          Size: {props.shoe.size} {props.shoe.sizetype.symbol}{" "}
+          {props.shoe.styleCode}
+        </div>
+      </ShoeText>
     </ShoeBox>
   );
 }

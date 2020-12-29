@@ -6,12 +6,13 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// const awsroutes = require("./awsroutes.js");
 // const db = require('../db/index.js');
 const db = require("../db/controllers/users.js");
 const models = require("../db/models.js");
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, "../public")));
+const AWS = require("aws-sdk");
 
 app.get("/", (req, res) => {
   res.send("Gotta Catch 'Em All");
@@ -31,6 +32,32 @@ app.get("/user", (req, res) => {
     where: {
       userId: userId,
     },
+    include: [
+      {
+        model: models.Image,
+      },
+      {
+        model: models.Model,
+      },
+      {
+        model: models.Brand,
+      },
+      {
+        model: models.User,
+      },
+      {
+        model: models.Collection,
+      },
+      {
+        model: models.Cut,
+      },
+      {
+        model: models.Type,
+      },
+      {
+        model: models.SizeType,
+      },
+    ],
   })
     .then((result) => res.json(result))
     .then(() => console.log("All user shoes recieved"))
@@ -45,7 +72,6 @@ app.post("/shoes", (req, res) => {
     size: req.body.size,
     sizetypeId: req.body.sizetypeId,
     boxStatus: req.body.boxStatus,
-    imageURL: req.body.imageURL,
     wears: req.body.wears,
     purchasePrice: req.body.purchasePrice,
     description: req.body.description,
@@ -58,6 +84,7 @@ app.post("/shoes", (req, res) => {
     cutId: req.body.cutId,
     typeId: req.body.typeId,
     collaborator: req.body.collaborator,
+    imageId: req.body.imageId,
   })
     .then((result) => res.json(result))
     .then(() => console.log("Shoe Created!"))
@@ -211,6 +238,61 @@ app.post("/sizetypes", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.post("/images", (req, res) => {
+  models.Image.create({
+    name: req.body.name,
+    url: req.body.url,
+    alt: req.body.alt,
+  })
+    .then((result) => res.json(result))
+    .then(() => console.log("Image Saved"))
+    .catch((err) => console.log(err));
+});
+
+app.get("/images", (req, res) => {
+  models.Image.findAll({})
+    .then((result) => res.json(result))
+    .then(() => console.log("All Imgaes Recieved"))
+    .catch((err) => console.log(err));
+});
+
+AWS.config.update({
+  region: "us-east-1",
+  accessKeyId: process.env.AWSAccessKeyId,
+  secretAccessKey: process.env.AWSSecretKey,
+});
+
+const S3_Bucket = process.env.Bucket;
+
+app.post("/upload/image", (req, res) => {
+  const s3 = new AWS.S3();
+  const fileName = req.body.fileName;
+  const fileType = req.body.fileType;
+  const s3Params = {
+    Bucket: S3_Bucket,
+    Key: fileName,
+    Expires: 500,
+    ContentType: fileType,
+    ACL: "public-read",
+  };
+
+  s3.getSignedUrl("putObject", s3Params, (err, url) => {
+    if (err) {
+      throw err;
+    } else {
+      debugger;
+      const returnData = {
+        signedRequest: url,
+        url: `https://${S3_Bucket}.s3.amazonaws.com/${fileName}`,
+      };
+      console.log("URL Created");
+      res.json({ success: true, data: { returnData } });
+    }
+  });
+});
+
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Connected on port ${process.env.PORT}`);
 });
+
+module.exports = app;
