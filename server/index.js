@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // const awsroutes = require("./awsroutes.js");
 // const db = require('../db/index.js');
 const db = require("../db/controllers/users.js");
@@ -290,9 +291,27 @@ app.post("/upload/image", (req, res) => {
     }
   });
 });
+const SneaksAPI = require("sneaks-api");
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Connected on port ${process.env.PORT}`);
+const sneaks = new SneaksAPI();
+
+// sneaks.getProducts("grinch", function (err, products) {
+//   console.log(products);
+// });
+
+app.get("/sneakerdata", (req, res, callback) => {
+  sneaks.getProducts(req.body.term, (err, shoes) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(shoes);
+      console.log(`Shoes for ${req.body.term}`);
+    }
+  });
+});
+
+app.listen(process.env.SNEAKERPORT || 5000, () => {
+  console.log(`Application is Connected on port ${process.env.SNEAKERPORT}`);
 });
 
 module.exports = app;
