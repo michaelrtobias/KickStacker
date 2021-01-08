@@ -310,8 +310,8 @@ app.get("/sneakerdata", (req, res, callback) => {
   });
 });
 
-app.listen(process.env.SNEAKERPORT || 5000, () => {
-  console.log(`Application is Connected on port ${process.env.SNEAKERPORT}`);
+app.listen(process.env.APPPORT || 5000, () => {
+  console.log(`Application is Connected on port ${process.env.APPPORT}`);
 });
 
 module.exports = app;

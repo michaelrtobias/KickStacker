@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UploadImage from "./uploadImage.jsx";
+import SearchAdd from "./addBySearch.jsx";
 function AddShoe(props) {
   const [brands, setBrands] = useState([]);
   const [brandId, setBrandId] = useState(null);
@@ -243,6 +244,8 @@ function AddShoe(props) {
   }, [modelId]);
   return (
     <div>
+      <h3>Either search for shoe or add manually</h3>
+      <SearchAdd />
       <div>
         <label>Select A Brand </label>
         <select
