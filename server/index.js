@@ -300,12 +300,12 @@ const sneaks = new SneaksAPI();
 // });
 
 app.get("/sneakerdata", (req, res, callback) => {
-  sneaks.getProducts(req.body.term, (err, shoes) => {
+  sneaks.getProducts(req.query.term, (err, shoes) => {
     if (err) {
       throw err;
     } else {
       res.send(shoes);
-      console.log(`Shoes for ${req.body.term}`);
+      console.log(`Shoes for ${req.query.term}`);
     }
   });
 });
