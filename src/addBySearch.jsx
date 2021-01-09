@@ -3,20 +3,19 @@ import axios from "axios";
 
 function SearchAdd(props) {
   const [sneaksSearchTerm, setSneaksSearchTerm] = useState("");
-  const [sneakerSearchList, setSneakerSearchList] = useState({});
+  // const [sneakerSearchList, setSneakerSearchList] = useState({});
 
-  const getSneaksData = (term) => {
-    debugger;
-    axios
-      .get("/sneakerdata", {
-        params: {
-          term: term,
-        },
-      })
-      .then((res) => res.data)
-      .then((shoes) => setSneakerSearchList(shoes))
-      .catch((err) => console.log(err));
-  };
+  // const getSneaksData = (term) => {
+  //   axios
+  //     .get("/sneakerdata", {
+  //       params: {
+  //         term: term,
+  //       },
+  //     })
+  //     .then((res) => res.data)
+  //     .then((shoes) => setSneakerSearchList(shoes))
+  //     .catch((err) => console.log(err));
+  // };
 
   return (
     <div>
@@ -25,7 +24,9 @@ function SearchAdd(props) {
         onChange={(e) => setSneaksSearchTerm(e.target.value)}
         placeholder="Search For Shoes"
       ></input>
-      <button onClick={() => getSneaksData(sneaksSearchTerm)}>Search</button>
+      <button onClick={() => props.getSneaksData(sneaksSearchTerm)}>
+        Search
+      </button>
     </div>
   );
 }
