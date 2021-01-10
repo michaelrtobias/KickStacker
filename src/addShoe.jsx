@@ -18,7 +18,7 @@ const LeftColumn = styled.div`
 `;
 
 function AddShoe(props) {
-  const [sneakerSearchList, setSneakerSearchList] = useState({});
+  const [sneakerSearchList, setSneakerSearchList] = useState([]);
   const [brands, setBrands] = useState([]);
   const [brandId, setBrandId] = useState(null);
   const [collections, setCollections] = useState([]);
@@ -446,7 +446,7 @@ function AddShoe(props) {
         <button onClick={() => props.setView("dashboard")}>Cancel</button>
       </LeftColumn>
       <RightColumn>
-        <SearchAddList />
+        <SearchAddList sneakerSearchList={sneakerSearchList} />
       </RightColumn>
     </AddShoeCoulums>
   );
