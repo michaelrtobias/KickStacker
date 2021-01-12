@@ -3,14 +3,9 @@ import SearchShoe from "./searchAddShoe.jsx";
 function SearchAddList(props) {
   return (
     <div>
-      <div>TBA</div>
-      {props.sneakerSearchList.length > 0 ? (
-        props.sneakerSearchList.map((shoe) => {
-          <SearchShoe shoe={shoe} key={shoe.id} />;
-        })
-      ) : (
-        <div>Search for shoes</div>
-      )}
+      {props.sneakerSearchList.map((shoe) => (
+        <SearchShoe shoe={shoe} key={shoe._id} />
+      ))}
     </div>
   );
 }

@@ -25,15 +25,7 @@ function SearchShoe(props) {
 
   return (
     <div>
-      {/* <ShoePic src={props.shoe.image.url} alt={props.shoe.image.alt}></ShoePic> */}
-      <div>
-        <div>
-          {props.shoe.brand} - {props.shoe.silhoutte}
-        </div>
-        <div>{props.shoe.shoeName}</div>
-        <div>{props.shoe.styleID}</div>
-        <div>{props.shoe.releaseDate}</div>
-      </div>
+      <div>{props.shoe.shoeName}</div>
     </div>
   );
 }

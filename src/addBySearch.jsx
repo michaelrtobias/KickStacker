@@ -8,6 +8,10 @@ function SearchAdd(props) {
     props.getSneaksData(sneaksSearchTerm);
   }, [sneaksSearchTerm]);
 
+  // useEffect(() => {
+  //   props.getSneaksData("Nike SB");
+  // }, []);
+
   return (
     <div>
       <input
