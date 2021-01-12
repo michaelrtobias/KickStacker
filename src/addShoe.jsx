@@ -274,7 +274,7 @@ function AddShoe(props) {
     <AddShoeCoulums>
       <LeftColumn>
         <h3>Either search for shoe or add manually</h3>
-        <SearchAdd getSneaksData={getSneaksData} />
+
         <div>
           <label>Select A Brand </label>
           <select
@@ -446,6 +446,7 @@ function AddShoe(props) {
         <button onClick={() => props.setView("dashboard")}>Cancel</button>
       </LeftColumn>
       <RightColumn>
+        <SearchAdd getSneaksData={getSneaksData} />
         <SearchAddList sneakerSearchList={sneakerSearchList} />
       </RightColumn>
     </AddShoeCoulums>

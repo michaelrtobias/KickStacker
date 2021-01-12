@@ -15,11 +15,8 @@ function Dashboard(props) {
   }, []);
   return (
     <div>
-      <div>{props.user.firstName}'s Dashboard</div>
-      <div>
-        <button onClick={() => handleClickAddShoe()}>Add A Shoe</button>
-        <button onClick={() => props.setView("signin")}>Change User</button>
-      </div>
+      <h3>{props.user.firstName}'s Dashboard</h3>
+
       <SearchBar setSearchTerm={setSearchTerm}></SearchBar>
       <Collection userSneakers={props.userSneakers} searchTerm={searchTerm} />
     </div>
