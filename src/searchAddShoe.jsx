@@ -25,6 +25,7 @@ function SearchShoe(props) {
 
   return (
     <div>
+      <ShoePic src={props.shoe.thumbnail}></ShoePic>
       <div>{props.shoe.shoeName}</div>
     </div>
   );
