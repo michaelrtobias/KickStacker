@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 
 import UploadImage from "./uploadImage.jsx";
-import SearchAdd from "./addBySearch.jsx";
+import SearchAddBar from "./addBySearch.jsx";
 import SearchAddList from "./searchAddList.jsx";
 
 const AddShoeCoulums = styled.div`
@@ -125,7 +125,6 @@ function AddShoe(props) {
         purchasePrice: purchasePrice,
         description: description,
         receipt: recieptStatus,
-        wears: 0,
         nickname: shoeNickname,
         modelId: modelId,
         brandId: brandId,
@@ -446,8 +445,19 @@ function AddShoe(props) {
         <button onClick={() => props.setView("dashboard")}>Cancel</button>
       </LeftColumn>
       <RightColumn>
-        <SearchAdd getSneaksData={getSneaksData} />
-        <SearchAddList sneakerSearchList={sneakerSearchList} />
+        <SearchAddBar getSneaksData={getSneaksData} />
+        <SearchAddList
+          sneakerSearchList={sneakerSearchList}
+          setShoeName={setShoeName}
+          setStyleCode={setStyleCode}
+          setDescription={setDescription}
+          setImageId={setImageId}
+          setModelId={setModelId}
+          setBrandId={setBrandId}
+          brandId={brandId}
+          setCollectionId={setCollectionId}
+          collectionId={collectionId}
+        />
       </RightColumn>
     </AddShoeCoulums>
   );

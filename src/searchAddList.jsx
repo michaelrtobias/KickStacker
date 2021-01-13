@@ -4,10 +4,22 @@ function SearchAddList(props) {
   return (
     <div>
       {props.sneakerSearchList.map((shoe) => (
-        <SearchShoe shoe={shoe} key={shoe._id} />
+        <SearchShoe
+          shoe={shoe}
+          key={shoe._id}
+          setShoeName={props.setShoeName}
+          setStyleCode={props.setStyleCode}
+          setDescription={props.setDescription}
+          setImageId={props.setImageId}
+          setModelId={props.setModelId}
+          setBrandId={props.setBrandId}
+          setCollectionId={props.setCollectionId}
+          collectionId={props.collectionId}
+          brandId={props.brandId}
+        />
       ))}
     </div>
   );
 }
 
-module.exports = SearchAddList;
+export default SearchAddList;

@@ -110,7 +110,7 @@ const Shoe = db.define("shoes", {
   },
   receipt: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    allowNull: true,
   },
   nickname: {
     type: DataTypes.STRING,

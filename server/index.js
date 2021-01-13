@@ -146,6 +146,30 @@ app.post("/brands", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.post("/searchbrands", (req, res) => {
+  models.Brand.findOrCreate({
+    where: { name: req.body.name },
+    defaults: { headquarters: null },
+  })
+    .then((result) => res.json(result))
+    .then(() => console.log("Brand found or created"))
+    .catch((err) => console.log(err));
+});
+
+app.post("/searchcollections", (req, res) => {
+  models.Collection.findOrCreate({
+    where: {
+      name: req.body.name,
+    },
+    defaults: {
+      brandId: req.body.brandId,
+    },
+  })
+    .then((result) => res.json(result))
+    .then(() => console.log("Collection found or added"))
+    .catch((err) => console.log(err));
+});
+
 app.get("/types", (req, res) => {
   models.Type.findAll({})
     .then((result) => res.json(result))

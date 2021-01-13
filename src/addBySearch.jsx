@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
-function SearchAdd(props) {
+const SearchBar = styled.input`
+  margin-top: 10px;
+  width: 100%;
+`;
+
+function SearchAddBar(props) {
   const [sneaksSearchTerm, setSneaksSearchTerm] = useState("");
 
   useEffect(() => {
@@ -10,13 +16,13 @@ function SearchAdd(props) {
 
   return (
     <div>
-      <input
+      <SearchBar
         type="text"
         onChange={(e) => setSneaksSearchTerm(e.target.value)}
         placeholder="Search For Shoes"
-      ></input>
+      ></SearchBar>
     </div>
   );
 }
 
-export default SearchAdd;
+export default SearchAddBar;

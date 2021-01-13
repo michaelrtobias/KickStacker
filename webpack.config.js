@@ -1,38 +1,38 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: path.join(__dirname, '/src/index.js'),
+  entry: path.join(__dirname, "/src/index.js"),
   output: {
-    filename: 'bundle.js',
-    path: path.join(__dirname, '/public')
+    filename: "bundle.js",
+    path: path.join(__dirname, "/public"),
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        include: path.join(__dirname, '/src'),
+        include: path.join(__dirname, "/src"),
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env',"@babel/preset-react"]
-          }
-        }
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
       },
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 1,
-              modules: true
-            }
-          }
-        ]
-      }
-    ]
+              modules: true,
+            },
+          },
+        ],
+      },
+    ],
   },
-  mode: 'development'
+  mode: "development",
 };

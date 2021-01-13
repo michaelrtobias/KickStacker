@@ -13,7 +13,7 @@ const Background = styled.div`
 `;
 
 const NavButton = styled.div`
-  background-color: #ff6600;
+  background-color: #ff8000;
   border-top: 3px solid black;
   border-left: 3px solid black;
   border-right: 3px solid black;
@@ -28,7 +28,7 @@ const Header = styled.header`
 
 const HoverWrapper = styled.div`
   &:hover ${NavButton} {
-    background-color: #fa9e61;
+    background-color: #ffd9b3;
   }
 `;
 
