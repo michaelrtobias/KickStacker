@@ -96,7 +96,7 @@ const Shoe = db.define("shoes", {
   },
   wears: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
     defaultValue: 0,
   },
   purchasePrice: {
@@ -105,7 +105,7 @@ const Shoe = db.define("shoes", {
     defaultValue: 0,
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(2000),
     allowNull: true,
   },
   receipt: {

@@ -16,6 +16,8 @@ function SearchAddList(props) {
           setCollectionId={props.setCollectionId}
           collectionId={props.collectionId}
           brandId={props.brandId}
+          setModalShow={props.setModalShow}
+          setShoeColor={props.setShoeColor}
         />
       ))}
     </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
+import SearchModal from "./searchConfirmPopupModal.jsx";
 import UploadImage from "./uploadImage.jsx";
 import SearchAddBar from "./addBySearch.jsx";
 import SearchAddList from "./searchAddList.jsx";
@@ -47,6 +47,7 @@ function AddShoe(props) {
   const [newCollection, setNewCollection] = useState("");
   const [newModel, setNewModel] = useState("");
   const [imageId, setImageId] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
 
   const getAllBrands = () => {
     axios("/brands")
@@ -273,7 +274,23 @@ function AddShoe(props) {
     <AddShoeCoulums>
       <LeftColumn>
         <h3>Either search for shoe or add manually</h3>
-
+        <SearchModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          setShoeSize={setShoeSize}
+          sizeTypes={sizeTypes}
+          setSizeType={setSizeType}
+          setShoeColor={setShoeColor}
+          setShoeType={setShoeType}
+          types={types}
+          setShoeCut={setShoeCut}
+          cuts={cuts}
+          setBoxStatus={setBoxStatus}
+          setPurchasePrice={setPurchasePrice}
+          setRecieptStatus={setRecieptStatus}
+          setCollaborator={setCollaborator}
+          addShoe={addShoe}
+        />
         <div>
           <label>Select A Brand </label>
           <select
@@ -457,6 +474,8 @@ function AddShoe(props) {
           brandId={brandId}
           setCollectionId={setCollectionId}
           collectionId={collectionId}
+          setModalShow={setModalShow}
+          setShoeColor={setShoeColor}
         />
       </RightColumn>
     </AddShoeCoulums>

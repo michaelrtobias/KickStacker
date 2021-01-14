@@ -106,9 +106,11 @@ function SearchShoe(props) {
   const SearchAddClick = () => {
     props.setShoeName(props.shoe.shoeName);
     props.setStyleCode(props.shoe.styleID);
+    props.setShoeColor(props.shoe.colorway);
     props.setDescription(props.shoe.description);
     AddImage();
     SearchOrAddBrand();
+    props.setModalShow(true);
   };
 
   // useEffect(() => {
