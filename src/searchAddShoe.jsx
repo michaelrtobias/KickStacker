@@ -58,7 +58,7 @@ function SearchShoe(props) {
         name: props.shoe.brand,
       })
       .then((res) => {
-        setBrandID(res.data[0].id);
+        props.setBrandId(res.data[0].id);
         const infoObj = { brandId: res.data[0].id };
         return infoObj;
       })
@@ -74,7 +74,6 @@ function SearchShoe(props) {
             return infoObj;
           })
           .then((infoObj) => {
-            debugger;
             axios
               .post("/searchmodels", {
                 name: props.shoe.silhoutte,
