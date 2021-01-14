@@ -34,6 +34,7 @@ const HoverShoe = styled.div`
 
 function SearchShoe(props) {
   const [shoeURL, setShoeURL] = useState("");
+  const [brandID, setBrandID] = useState("");
 
   const AddImage = (req, res) => {
     axios
@@ -57,21 +58,37 @@ function SearchShoe(props) {
         name: props.shoe.brand,
       })
       .then((res) => {
-        props.setBrandId(res.data[0].id);
-        return res.data[0].id;
+        setBrandID(res.data[0].id);
+        const infoObj = { brandId: res.data[0].id };
+        return infoObj;
       })
-      .then((result) => {
+      .then((infoObj) => {
         axios
           .post("/searchcollections", {
             name: props.shoe.make,
-            brandId: result,
+            brandId: infoObj.brandId,
           })
           .then((res) => {
             props.setCollectionId(res.data[0].id);
+            infoObj.collectionId = res.data[0].id;
+            return infoObj;
+          })
+          .then((infoObj) => {
+            debugger;
+            axios
+              .post("/searchmodels", {
+                name: props.shoe.silhoutte,
+                brandId: infoObj.brandId,
+                collectionId: infoObj.collectionId,
+              })
+              .then((res) => {
+                props.setModelId(res.data[0].id);
+              })
+              .catch((err) => console.log(err));
           })
           .catch((err) => console.log(err));
       })
-      .then(() => console.log("Brand has been hooked"))
+
       .catch((err) => console.log(err));
   };
 

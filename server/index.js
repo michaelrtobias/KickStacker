@@ -170,6 +170,21 @@ app.post("/searchcollections", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.post("/searchmodels", (req, res) => {
+  models.Model.findOrCreate({
+    where: {
+      name: req.body.name,
+    },
+    defaults: {
+      brandId: req.body.brandId,
+      collectionId: req.body.collectionId,
+    },
+  })
+    .then((result) => res.json(result))
+    .then(() => console.log("Model found or added"))
+    .catch((err) => console.log(err));
+});
+
 app.get("/types", (req, res) => {
   models.Type.findAll({})
     .then((result) => res.json(result))
