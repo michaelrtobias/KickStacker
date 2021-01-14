@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // const awsroutes = require("./awsroutes.js");
 // const db = require('../db/index.js');
 const db = require("../db/controllers/users.js");
@@ -142,6 +143,45 @@ app.post("/brands", (req, res) => {
   })
     .then((result) => res.json(result))
     .then(() => console.log("Brand Created"))
+    .catch((err) => console.log(err));
+});
+
+app.post("/searchbrands", (req, res) => {
+  models.Brand.findOrCreate({
+    where: { name: req.body.name },
+    defaults: { headquarters: null },
+  })
+    .then((result) => res.json(result))
+    .then(() => console.log("Brand found or created"))
+    .catch((err) => console.log(err));
+});
+
+app.post("/searchcollections", (req, res) => {
+  models.Collection.findOrCreate({
+    where: {
+      name: req.body.name,
+    },
+    defaults: {
+      brandId: req.body.brandId,
+    },
+  })
+    .then((result) => res.json(result))
+    .then(() => console.log("Collection found or added"))
+    .catch((err) => console.log(err));
+});
+
+app.post("/searchmodels", (req, res) => {
+  models.Model.findOrCreate({
+    where: {
+      name: req.body.name,
+    },
+    defaults: {
+      brandId: req.body.brandId,
+      collectionId: req.body.collectionId,
+    },
+  })
+    .then((result) => res.json(result))
+    .then(() => console.log("Model found or added"))
     .catch((err) => console.log(err));
 });
 
@@ -290,9 +330,27 @@ app.post("/upload/image", (req, res) => {
     }
   });
 });
+const SneaksAPI = require("sneaks-api");
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Connected on port ${process.env.PORT}`);
+const sneaks = new SneaksAPI();
+
+// sneaks.getProducts("grinch", function (err, products) {
+//   console.log(products);
+// });
+
+app.get("/sneakerdata", (req, res, callback) => {
+  sneaks.getProducts(req.query.term, (err, shoes) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(shoes);
+      console.log(`Shoes for ${req.query.term}`);
+    }
+  });
+});
+
+app.listen(process.env.APPPORT || 5000, () => {
+  console.log(`Application is Connected on port ${process.env.APPPORT}`);
 });
 
 module.exports = app;

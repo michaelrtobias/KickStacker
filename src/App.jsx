@@ -12,6 +12,26 @@ const Background = styled.div`
   border: 3px solid black;
 `;
 
+const NavButton = styled.div`
+  background-color: #ff8000;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  padding: 5px 175px 5px 175px;
+`;
+
+const Header = styled.header`
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+`;
+
+const HoverWrapper = styled.div`
+  &:hover ${NavButton} {
+    background-color: #ffd9b3;
+  }
+`;
+
 function App() {
   const [userId, setUserId] = useState(0);
   const [view, setView] = useState("signin");
@@ -78,9 +98,28 @@ function App() {
   };
 
   return (
-    <Background>
-      <div>{renderView()}</div>
-    </Background>
+    <div>
+      <h1>Shoe Stacker</h1>
+      {view === "signin" ? null : (
+        <Header>
+          <HoverWrapper>
+            <NavButton onClick={() => setView("signin")}>Change User</NavButton>
+          </HoverWrapper>
+          <HoverWrapper>
+            <NavButton onClick={() => setView("dashboard")}>
+              Collection
+            </NavButton>
+          </HoverWrapper>
+          <HoverWrapper>
+            <NavButton onClick={() => setView("addshoe")}>Add Shoe</NavButton>
+          </HoverWrapper>
+        </Header>
+      )}
+
+      <Background>
+        <div>{renderView()}</div>
+      </Background>
+    </div>
   );
 }
 

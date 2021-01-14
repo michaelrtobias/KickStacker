@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+const UploadSuccessful = styled.button`
+  background-color: green;
+  color: black;
+`;
 
 function UploadImage(props) {
   const [uploadClicked, setUploadClicked] = useState(false);
@@ -66,6 +72,18 @@ function UploadImage(props) {
       });
   };
 
+  const uploadButton = () => {
+    if (success === true) {
+      return (
+        <UploadSuccessful onClick={() => uploadImage()}>
+          Upload Successful
+        </UploadSuccessful>
+      );
+    } else {
+      return <button onClick={() => uploadImage()}>Upload Here!</button>;
+    }
+  };
+
   const handleChange = () => {
     setSuccess(false);
     setUrl("");
@@ -82,7 +100,7 @@ function UploadImage(props) {
           handleChange();
         }}
       ></input>
-      <button onClick={() => uploadImage()}>Upload Here!</button>
+      {uploadButton()}
     </div>
   );
 }
