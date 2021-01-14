@@ -19,6 +19,8 @@ const LeftColumn = styled.div`
 
 function AddShoe(props) {
   const [sneakerSearchList, setSneakerSearchList] = useState([]);
+  const [searchShoeSilhoutte, setSearchShoeSilhoutte] = useState("");
+  const [brandName, setBrandName] = useState("");
   const [brands, setBrands] = useState([]);
   const [brandId, setBrandId] = useState(null);
   const [collections, setCollections] = useState([]);
@@ -48,6 +50,8 @@ function AddShoe(props) {
   const [newModel, setNewModel] = useState("");
   const [imageId, setImageId] = useState(null);
   const [modalShow, setModalShow] = useState(false);
+  const [modalImageUrl, setModalImageUrl] = useState("");
+  const [modalImageAlt, setModalImageAlt] = useState("");
 
   const getAllBrands = () => {
     axios("/brands")
@@ -289,7 +293,14 @@ function AddShoe(props) {
           setPurchasePrice={setPurchasePrice}
           setRecieptStatus={setRecieptStatus}
           setCollaborator={setCollaborator}
-          addShoe={addShoe}
+          handleSubmit={handleSubmit}
+          shoeName={shoeName}
+          styleCode={styleCode}
+          brandName={brandName}
+          shoeColor={shoeColor}
+          searchShoeSilhoutte={searchShoeSilhoutte}
+          modalImageUrl={modalImageUrl}
+          modalImageAlt={modalImageAlt}
         />
         <div>
           <label>Select A Brand </label>
@@ -476,6 +487,10 @@ function AddShoe(props) {
           collectionId={collectionId}
           setModalShow={setModalShow}
           setShoeColor={setShoeColor}
+          setBrandName={setBrandName}
+          setSearchShoeSilhoutte={setSearchShoeSilhoutte}
+          setModalImageUrl={setModalImageUrl}
+          setModalImageAlt={setModalImageAlt}
         />
       </RightColumn>
     </AddShoeCoulums>
