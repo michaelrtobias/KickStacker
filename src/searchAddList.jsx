@@ -7,8 +7,8 @@ function SearchAddList(props) {
         <SearchShoe
           shoe={shoe}
           key={shoe._id}
-          setShoeName={props.setShoeName}
-          setStyleCode={props.setStyleCode}
+          setshoename={props.setshoename}
+          setstylecode={props.setstylecode}
           setDescription={props.setDescription}
           setImageId={props.setImageId}
           setModelId={props.setModelId}
@@ -17,11 +17,11 @@ function SearchAddList(props) {
           collectionId={props.collectionId}
           brandId={props.brandId}
           setModalShow={props.setModalShow}
-          setShoeColor={props.setShoeColor}
-          setBrandName={props.setBrandName}
-          setSearchShoeSilhoutte={props.setSearchShoeSilhoutte}
-          setModalImageUrl={props.setModalImageUrl}
-          setModalImageAlt={props.setModalImageAlt}
+          setshoecolor={props.setshoecolor}
+          setbrandname={props.setbrandname}
+          setsearchshoesilhoutte={props.setsearchshoesilhoutte}
+          setmodalimageurl={props.setmodalimageurl}
+          setmodalimagealt={props.setmodalimagealt}
           setReleaseDate={props.setReleaseDate}
         />
       ))}

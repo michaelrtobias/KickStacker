@@ -19,31 +19,31 @@ const LeftColumn = styled.div`
 
 function AddShoe(props) {
   const [sneakerSearchList, setSneakerSearchList] = useState([]);
-  const [searchShoeSilhoutte, setSearchShoeSilhoutte] = useState("");
-  const [brandName, setBrandName] = useState("");
+  const [searchshoesilhoutte, setsearchshoesilhoutte] = useState("");
+  const [brandname, setbrandname] = useState("");
   const [brands, setBrands] = useState([]);
   const [brandId, setBrandId] = useState(null);
   const [collections, setCollections] = useState([]);
   const [collectionId, setCollectionId] = useState(null);
   const [models, setModels] = useState([]);
   const [modelId, setModelId] = useState(null);
-  const [styleCode, setStyleCode] = useState("");
-  const [shoeName, setShoeName] = useState("");
+  const [stylecode, setstylecode] = useState("");
+  const [shoename, setshoename] = useState("");
   const [shoeNickname, setShoeNickname] = useState("");
-  const [shoeColor, setShoeColor] = useState("");
-  const [shoeSize, setShoeSize] = useState(null);
-  const [sizeTypes, setSizeTypes] = useState([]);
-  const [sizeType, setSizeType] = useState(null);
-  const [boxStatus, setBoxStatus] = useState(null);
+  const [shoecolor, setshoecolor] = useState("");
+  const [shoeSize, setshoesize] = useState(null);
+  const [sizetypes, setsizetypes] = useState([]);
+  const [sizetype, setsizetype] = useState(null);
+  const [boxstatus, setboxstatus] = useState(null);
   const [wears, setWears] = useState(null);
-  const [purchasePrice, setPurchasePrice] = useState(null);
+  const [purchaseprice, setpurchaseprice] = useState(null);
   const [description, setDescription] = useState(null);
-  const [recieptStatus, setRecieptStatus] = useState(null);
-  const [collaborator, setCollaborator] = useState(null);
+  const [recieptstatus, setrecieptstatus] = useState(null);
+  const [collaborator, setcollaborator] = useState(null);
   const [types, setTypes] = useState([]);
-  const [shoeType, setShoeType] = useState(null);
+  const [shoeType, setshoetype] = useState(null);
   const [cuts, setCuts] = useState([]);
-  const [shoeCut, setShoeCut] = useState(null);
+  const [shoecut, setshoecut] = useState(null);
   const [newBrand, setNewBrand] = useState("");
   const [brandHeadquarters, setBrandHeadquarters] = useState("");
   const [newCollection, setNewCollection] = useState("");
@@ -51,8 +51,8 @@ function AddShoe(props) {
   const [imageId, setImageId] = useState(null);
   const [modalShow, setModalShow] = useState(false);
   const [releaseDate, setReleaseDate] = useState("");
-  const [modalImageUrl, setModalImageUrl] = useState("");
-  const [modalImageAlt, setModalImageAlt] = useState("");
+  const [modalimageurl, setmodalimageurl] = useState("");
+  const [modalimagealt, setmodalimagealt] = useState("");
 
   const getAllBrands = () => {
     axios("/brands")
@@ -94,7 +94,7 @@ function AddShoe(props) {
   const getSizeTypes = () => {
     axios(`/sizeTypes`)
       .then((res) => res.data)
-      .then((sizeType) => setSizeTypes(sizeType))
+      .then((sizeType) => setsizetypes(sizeType))
       .catch((err) => console.log(err));
   };
 
@@ -120,17 +120,17 @@ function AddShoe(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: shoeName,
-        styleCode: styleCode,
-        color: shoeColor,
+        name: shoename,
+        styleCode: stylecode,
+        color: shoecolor,
         size: shoeSize,
-        sizetypeId: sizeType,
-        boxStatus: boxStatus,
+        sizetypeId: sizetype,
+        boxStatus: boxstatus,
         imageId: imageId,
         wears: wears,
-        purchasePrice: purchasePrice,
+        purchasePrice: purchaseprice,
         description: description,
-        receipt: recieptStatus,
+        receipt: recieptstatus,
         nickname: shoeNickname,
         modelId: modelId,
         brandId: brandId,
@@ -156,7 +156,7 @@ function AddShoe(props) {
     setModelId(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handlesubmit = () => {
     addShoe();
     props.setView("dashboard");
   };
@@ -283,26 +283,26 @@ function AddShoe(props) {
         <SearchModal
           show={modalShow}
           onHide={() => setModalShow(false)}
-          setShoeSize={setShoeSize}
-          sizeTypes={sizeTypes}
-          setSizeType={setSizeType}
-          setShoeColor={setShoeColor}
-          setShoeType={setShoeType}
+          setshoesize={setshoesize}
+          sizetypes={sizetypes}
+          setsizetype={setsizetype}
+          setshoecolor={setshoecolor}
+          setshoetype={setshoetype}
           types={types}
-          setShoeCut={setShoeCut}
+          setshoecut={setshoecut}
           cuts={cuts}
-          setBoxStatus={setBoxStatus}
-          setPurchasePrice={setPurchasePrice}
-          setRecieptStatus={setRecieptStatus}
-          setCollaborator={setCollaborator}
-          handleSubmit={handleSubmit}
-          shoeName={shoeName}
-          styleCode={styleCode}
-          brandName={brandName}
-          shoeColor={shoeColor}
-          searchShoeSilhoutte={searchShoeSilhoutte}
-          modalImageUrl={modalImageUrl}
-          modalImageAlt={modalImageAlt}
+          setboxstatus={setboxstatus}
+          setpurchaseprice={setpurchaseprice}
+          setrecieptstatus={setrecieptstatus}
+          setcollaborator={setcollaborator}
+          handlesubmit={handlesubmit}
+          shoename={shoename}
+          stylecode={stylecode}
+          brandname={brandname}
+          shoecolor={shoecolor}
+          searchshoesilhoutte={searchshoesilhoutte}
+          modalimageurl={modalimageurl}
+          modalimagealt={modalimagealt}
         />
         <div>
           <label>Select A Brand </label>
@@ -355,7 +355,7 @@ function AddShoe(props) {
           <label>Name on Box:</label>
           <input
             placeholder="Enter Name on Box"
-            onChange={(e) => setShoeName(e.target.value)}
+            onChange={(e) => setshoename(e.target.value)}
           ></input>
         </div>
         <div>
@@ -369,18 +369,18 @@ function AddShoe(props) {
           <label>Style Code:</label>
           <input
             placeholder="Enter Style Code"
-            onChange={(e) => setStyleCode(e.target.value)}
+            onChange={(e) => setstylecode(e.target.value)}
           ></input>
         </div>
         <div>
           <label>Size:</label>
           <input
             placeholder="Enter Size"
-            onChange={(e) => setShoeSize(e.target.value)}
+            onChange={(e) => setshoesize(e.target.value)}
           ></input>
-          <select onChange={(e) => setSizeType(e.target.value)}>
+          <select onChange={(e) => setsizetype(e.target.value)}>
             <option value>Size Type</option>
-            {sizeTypes.map((type) => (
+            {sizetypes.map((type) => (
               <option key={type.id} value={type.id}>
                 {type.sizeType}
               </option>
@@ -391,12 +391,12 @@ function AddShoe(props) {
           <label>Color:</label>
           <input
             placeholder="Enter Color"
-            onChange={(e) => setShoeColor(e.target.value)}
+            onChange={(e) => setshoecolor(e.target.value)}
           ></input>
         </div>
         <div>
           <label>What kind of shoe is it? </label>
-          <select onChange={(e) => setShoeType(e.target.value)}>
+          <select onChange={(e) => setshoetype(e.target.value)}>
             <option>Select a type of shoe</option>
             {types.map((type) => (
               <option key={type.id} value={type.id}>
@@ -407,7 +407,7 @@ function AddShoe(props) {
         </div>
         <div>
           <label>How high is the cut? </label>
-          <select onChange={(e) => setShoeCut(e.target.value)}>
+          <select onChange={(e) => setshoecut(e.target.value)}>
             <option>Select a cut of shoe</option>
             {cuts.map((cut) => (
               <option key={cut.id} value={cut.id}>
@@ -423,21 +423,21 @@ function AddShoe(props) {
             type="radio"
             value="true"
             name="boxstatus"
-            onChange={(e) => setBoxStatus(e.target.value)}
+            onChange={(e) => setboxstatus(e.target.value)}
           ></input>
           <label htmlFor="boxstatus">False</label>
           <input
             type="radio"
             value="false"
             name="boxstatus"
-            onChange={(e) => setBoxStatus(e.target.value)}
+            onChange={(e) => setboxstatus(e.target.value)}
           ></input>
         </div>
         <div>
           <label>Purchase Price: </label>
           <input
             type="number"
-            onChange={(e) => setPurchasePrice(e.target.value)}
+            onChange={(e) => setpurchaseprice(e.target.value)}
           ></input>
         </div>
         <div>
@@ -447,14 +447,14 @@ function AddShoe(props) {
             type="radio"
             value="true"
             name="receiptstatus"
-            onChange={(e) => setRecieptStatus(e.target.value)}
+            onChange={(e) => setrecieptstatus(e.target.value)}
           ></input>
           <label htmlFor="receiptstatus">False</label>
           <input
             type="radio"
             value="false"
             name="receiptstatus"
-            onChange={(e) => setRecieptStatus(e.target.value)}
+            onChange={(e) => setrecieptstatus(e.target.value)}
           ></input>
         </div>
         <div>
@@ -466,7 +466,7 @@ function AddShoe(props) {
         </div>
         <div>
           <label>Is the shoe collaboration? If yes, with who?</label>
-          <input onChange={(e) => setCollaborator(e.target.value)}></input>
+          <input onChange={(e) => setcollaborator(e.target.value)}></input>
         </div>
 
         <UploadImage setImageId={setImageId} />
@@ -478,8 +478,8 @@ function AddShoe(props) {
         <SearchAddBar getSneaksData={getSneaksData} />
         <SearchAddList
           sneakerSearchList={sneakerSearchList}
-          setShoeName={setShoeName}
-          setStyleCode={setStyleCode}
+          setshoename={setshoename}
+          setstylecode={setstylecode}
           setDescription={setDescription}
           setImageId={setImageId}
           setModelId={setModelId}
@@ -488,11 +488,11 @@ function AddShoe(props) {
           setCollectionId={setCollectionId}
           collectionId={collectionId}
           setModalShow={setModalShow}
-          setShoeColor={setShoeColor}
-          setBrandName={setBrandName}
-          setSearchShoeSilhoutte={setSearchShoeSilhoutte}
-          setModalImageUrl={setModalImageUrl}
-          setModalImageAlt={setModalImageAlt}
+          setshoecolor={setshoecolor}
+          setbrandname={setbrandname}
+          setsearchshoesilhoutte={setsearchshoesilhoutte}
+          setmodalimageurl={setmodalimageurl}
+          setmodalimagealt={setmodalimagealt}
           setReleaseDate={setReleaseDate}
         />
       </RightColumn>

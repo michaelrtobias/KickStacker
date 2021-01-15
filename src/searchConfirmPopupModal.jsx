@@ -70,24 +70,24 @@ function SearchModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {props.shoeName} - {props.styleCode} - {props.shoeColor}
+          {props.shoename} - {props.stylecode} - {props.shoecolor}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <ModalBox>
           <ModalImage
-            src={props.modalImageUrl}
-            alt={props.modalImageAlt}
+            src={props.modalimageurl}
+            alt={props.modalimagealt}
           ></ModalImage>
           <LeftInputs>
             <SizeInputs>
               <input
                 placeholder="Enter Size"
-                onChange={(e) => props.setShoeSize(e.target.value)}
+                onChange={(e) => props.setshoesize(e.target.value)}
               ></input>
-              <select onChange={(e) => props.setSizeType(e.target.value)}>
+              <select onChange={(e) => props.setsizetype(e.target.value)}>
                 <option value>Size Type</option>
-                {props.sizeTypes.map((type) => (
+                {props.sizetypes.map((type) => (
                   <option key={type.id} value={type.id}>
                     {type.sizeType}
                   </option>
@@ -96,7 +96,7 @@ function SearchModal(props) {
             </SizeInputs>
             <div>
               <label>What kind of shoe is it? </label>
-              <select onChange={(e) => props.setShoeType(e.target.value)}>
+              <select onChange={(e) => props.setshoetype(e.target.value)}>
                 <option>Select type</option>
                 {props.types.map((type) => (
                   <option key={type.id} value={type.id}>
@@ -107,7 +107,7 @@ function SearchModal(props) {
             </div>
             <div>
               <label>How high is the cut? </label>
-              <select onChange={(e) => props.setShoeCut(e.target.value)}>
+              <select onChange={(e) => props.setshoecut(e.target.value)}>
                 <option>Select a cut</option>
                 {props.cuts.map((cut) => (
                   <option key={cut.id} value={cut.id}>
@@ -124,14 +124,14 @@ function SearchModal(props) {
                 type="radio"
                 value="true"
                 name="boxstatus"
-                onChange={(e) => props.setBoxStatus(e.target.value)}
+                onChange={(e) => props.setboxstatus(e.target.value)}
               ></input>
               <label htmlFor="boxstatus">False</label>
               <input
                 type="radio"
                 value="false"
                 name="boxstatus"
-                onChange={(e) => props.setBoxStatus(e.target.value)}
+                onChange={(e) => props.setboxstatus(e.target.value)}
               ></input>
             </BoxInput>
           </LeftInputs>
@@ -140,7 +140,7 @@ function SearchModal(props) {
               <label>Purchase Price: </label>
               <input
                 type="number"
-                onChange={(e) => props.setPurchasePrice(e.target.value)}
+                onChange={(e) => props.setpurchaseprice(e.target.value)}
               ></input>
             </RowInputs>
             <RowInputs>
@@ -150,27 +150,27 @@ function SearchModal(props) {
                 type="radio"
                 value="true"
                 name="receiptstatus"
-                onChange={(e) => props.setRecieptStatus(e.target.value)}
+                onChange={(e) => props.setrecieptstatus(e.target.value)}
               ></input>
               <label htmlFor="receiptstatus">False</label>
               <input
                 type="radio"
                 value="false"
                 name="receiptstatus"
-                onChange={(e) => props.setRecieptStatus(e.target.value)}
+                onChange={(e) => props.setrecieptstatus(e.target.value)}
               ></input>
             </RowInputs>
             <RowInputs>
               <label>Is the shoe collaboration? If yes, with who?</label>
               <input
-                onChange={(e) => props.setCollaborator(e.target.value)}
+                onChange={(e) => props.setcollaborator(e.target.value)}
               ></input>
             </RowInputs>
           </Rightinputs>
         </ModalBox>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => props.handleSubmit()}>Add Shoe</Button>
+        <Button onClick={() => props.handlesubmit()}>Add Shoe</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
