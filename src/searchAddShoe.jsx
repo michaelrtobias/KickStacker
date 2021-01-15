@@ -106,9 +106,16 @@ function SearchShoe(props) {
   const SearchAddClick = () => {
     props.setShoeName(props.shoe.shoeName);
     props.setStyleCode(props.shoe.styleID);
+    props.setShoeColor(props.shoe.colorway);
     props.setDescription(props.shoe.description);
+    props.setBrandName(props.shoe.brand);
+    props.setSearchShoeSilhoutte(props.shoe.silhoutte);
+    props.setModalImageUrl(props.shoe.thumbnail);
+    props.setModalImageAlt(props.shoe.urlKey);
+    props.setReleaseDate(props.shoe.releaseDate);
     AddImage();
     SearchOrAddBrand();
+    props.setModalShow(true);
   };
 
   // useEffect(() => {

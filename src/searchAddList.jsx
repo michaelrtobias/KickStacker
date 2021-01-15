@@ -16,6 +16,13 @@ function SearchAddList(props) {
           setCollectionId={props.setCollectionId}
           collectionId={props.collectionId}
           brandId={props.brandId}
+          setModalShow={props.setModalShow}
+          setShoeColor={props.setShoeColor}
+          setBrandName={props.setBrandName}
+          setSearchShoeSilhoutte={props.setSearchShoeSilhoutte}
+          setModalImageUrl={props.setModalImageUrl}
+          setModalImageAlt={props.setModalImageAlt}
+          setReleaseDate={props.setReleaseDate}
         />
       ))}
     </div>
