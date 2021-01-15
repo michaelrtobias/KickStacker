@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Modal from "react-bootstrap/modal";
+import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import styled from "styled-components";
 
