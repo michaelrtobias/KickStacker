@@ -86,6 +86,7 @@ app.post("/shoes", (req, res) => {
     typeId: req.body.typeId,
     collaborator: req.body.collaborator,
     imageId: req.body.imageId,
+    releaseDate: req.body.releaseDate,
   })
     .then((result) => res.json(result))
     .then(() => console.log("Shoe Created!"))

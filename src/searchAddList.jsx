@@ -22,6 +22,7 @@ function SearchAddList(props) {
           setSearchShoeSilhoutte={props.setSearchShoeSilhoutte}
           setModalImageUrl={props.setModalImageUrl}
           setModalImageAlt={props.setModalImageAlt}
+          setReleaseDate={props.setReleaseDate}
         />
       ))}
     </div>

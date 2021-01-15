@@ -50,6 +50,7 @@ function AddShoe(props) {
   const [newModel, setNewModel] = useState("");
   const [imageId, setImageId] = useState(null);
   const [modalShow, setModalShow] = useState(false);
+  const [releaseDate, setReleaseDate] = useState("");
   const [modalImageUrl, setModalImageUrl] = useState("");
   const [modalImageAlt, setModalImageAlt] = useState("");
 
@@ -138,6 +139,7 @@ function AddShoe(props) {
         cutId: shoeCut,
         typeId: shoeType,
         collaborator: collaborator,
+        releaseDate: releaseDate,
       }),
     })
       .then((res) => res.json())
@@ -491,6 +493,7 @@ function AddShoe(props) {
           setSearchShoeSilhoutte={setSearchShoeSilhoutte}
           setModalImageUrl={setModalImageUrl}
           setModalImageAlt={setModalImageAlt}
+          setReleaseDate={setReleaseDate}
         />
       </RightColumn>
     </AddShoeCoulums>

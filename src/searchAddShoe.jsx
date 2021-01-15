@@ -112,6 +112,7 @@ function SearchShoe(props) {
     props.setSearchShoeSilhoutte(props.shoe.silhoutte);
     props.setModalImageUrl(props.shoe.thumbnail);
     props.setModalImageAlt(props.shoe.urlKey);
+    props.setReleaseDate(props.shoe.releaseDate);
     AddImage();
     SearchOrAddBrand();
     props.setModalShow(true);

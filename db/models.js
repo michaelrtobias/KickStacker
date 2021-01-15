@@ -120,6 +120,10 @@ const Shoe = db.define("shoes", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  releaseDate: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 Collection.belongsTo(Brand);
