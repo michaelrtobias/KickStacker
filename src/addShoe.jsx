@@ -5,6 +5,7 @@ import SearchModal from "./searchConfirmPopupModal.jsx";
 import UploadImage from "./uploadImage.jsx";
 import SearchAddBar from "./addBySearch.jsx";
 import SearchAddList from "./searchAddList.jsx";
+import ManualAdd from "./manualAdd.jsx";
 
 const AddShoeCoulums = styled.div`
   display: flex;
@@ -136,7 +137,7 @@ function AddShoe(props) {
         brandId: brandId,
         userId: props.userId,
         collectionId: collectionId,
-        cutId: shoeCut,
+        cutId: shoecut,
         typeId: shoeType,
         collaborator: collaborator,
         releaseDate: releaseDate,
@@ -304,175 +305,36 @@ function AddShoe(props) {
           modalimageurl={modalimageurl}
           modalimagealt={modalimagealt}
         />
-        <div>
-          <label>Select A Brand </label>
-          <select
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          >
-            <option value>Select a brand</option>
-            <option value="0">Create A New Brand</option>
-            {brands.map((brand) => (
-              <option key={brand.id} value={brand.id}>
-                {brand.name}
-              </option>
-            ))}
-          </select>
-          <div>{createBrandField()}</div>
-        </div>
-        <div>
-          <label>Select A Collection </label>
-          <select
-            onChange={(e) => {
-              handleCollectionChange(e);
-            }}
-          >
-            <option value>Select a collection</option>
-            <option value="0">Create A New Collection</option>
-            {collections.map((collection) => (
-              <option key={collection.id} value={collection.id}>
-                {collection.name}
-              </option>
-            ))}
-          </select>
-          <div>{makeCollection()}</div>
-        </div>
-        <div>
-          <label>Select A Model </label>
-          <select onChange={(e) => setModelId(e.target.value)}>
-            <option value>Select a model</option>
-            <option value="0">Create A New Model</option>
-            {models.map((model) => (
-              <option key={model.id} value={model.id}>
-                {model.name}
-              </option>
-            ))}
-          </select>
-          <div>{makeModel()}</div>
-        </div>
-        <div>
-          <label>Name on Box:</label>
-          <input
-            placeholder="Enter Name on Box"
-            onChange={(e) => setshoename(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label>Shoe Nickname:</label>
-          <input
-            placeholder="Enter Nickname"
-            onChange={(e) => setShoeNickname(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label>Style Code:</label>
-          <input
-            placeholder="Enter Style Code"
-            onChange={(e) => setstylecode(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label>Size:</label>
-          <input
-            placeholder="Enter Size"
-            onChange={(e) => setshoesize(e.target.value)}
-          ></input>
-          <select onChange={(e) => setsizetype(e.target.value)}>
-            <option value>Size Type</option>
-            {sizetypes.map((type) => (
-              <option key={type.id} value={type.id}>
-                {type.sizeType}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Color:</label>
-          <input
-            placeholder="Enter Color"
-            onChange={(e) => setshoecolor(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label>What kind of shoe is it? </label>
-          <select onChange={(e) => setshoetype(e.target.value)}>
-            <option>Select a type of shoe</option>
-            {types.map((type) => (
-              <option key={type.id} value={type.id}>
-                {type.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>How high is the cut? </label>
-          <select onChange={(e) => setshoecut(e.target.value)}>
-            <option>Select a cut of shoe</option>
-            {cuts.map((cut) => (
-              <option key={cut.id} value={cut.id}>
-                {cut.cut}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Is there a box? : </label>
-          <label htmlFor="boxstatus">True</label>
-          <input
-            type="radio"
-            value="true"
-            name="boxstatus"
-            onChange={(e) => setboxstatus(e.target.value)}
-          ></input>
-          <label htmlFor="boxstatus">False</label>
-          <input
-            type="radio"
-            value="false"
-            name="boxstatus"
-            onChange={(e) => setboxstatus(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label>Purchase Price: </label>
-          <input
-            type="number"
-            onChange={(e) => setpurchaseprice(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label>Do you have the receipt?: </label>
-          <label htmlFor="receiptstatus">True</label>
-          <input
-            type="radio"
-            value="true"
-            name="receiptstatus"
-            onChange={(e) => setrecieptstatus(e.target.value)}
-          ></input>
-          <label htmlFor="receiptstatus">False</label>
-          <input
-            type="radio"
-            value="false"
-            name="receiptstatus"
-            onChange={(e) => setrecieptstatus(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label>Description/Comments: </label>
-          <input
-            placeholder="Optional"
-            onChange={(e) => setDescription(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label>Is the shoe collaboration? If yes, with who?</label>
-          <input onChange={(e) => setcollaborator(e.target.value)}></input>
-        </div>
-
-        <UploadImage setImageId={setImageId} />
-
-        <button onClick={() => handleSubmit()}>Add Shoe</button>
-        <button onClick={() => props.setView("dashboard")}>Cancel</button>
+        <ManualAdd
+          brands={brands}
+          createBrandField={createBrandField}
+          handleCollectionChange={handleCollectionChange}
+          collections={collections}
+          makeCollection={makeCollection}
+          setModelId={setModelId}
+          models={models}
+          makeModel={makeModel}
+          setshoename={setshoename}
+          setShoeNickname={setShoeNickname}
+          setstylecode={setstylecode}
+          setshoesize={setshoesize}
+          setsizetype={setsizetype}
+          sizetypes={sizetypes}
+          setshoecolor={setshoecolor}
+          setshoetype={setshoetype}
+          types={types}
+          setshoecut={setshoecut}
+          cuts={cuts}
+          setboxstatus={setboxstatus}
+          setpurchaseprice={setpurchaseprice}
+          setrecieptstatus={setrecieptstatus}
+          setDescription={setDescription}
+          setcollaborator={setcollaborator}
+          handlesubmit={handlesubmit}
+          setView={props.setView}
+          handleChange={handleChange}
+          setImageId={setImageId}
+        />
       </LeftColumn>
       <RightColumn>
         <SearchAddBar getSneaksData={getSneaksData} />
