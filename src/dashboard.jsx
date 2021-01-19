@@ -18,7 +18,11 @@ function Dashboard(props) {
       <h3>{props.user.firstName}'s Dashboard</h3>
 
       <SearchBar setSearchTerm={setSearchTerm}></SearchBar>
-      <Collection userSneakers={props.userSneakers} searchTerm={searchTerm} />
+      <Collection
+        userSneakers={props.userSneakers}
+        searchTerm={searchTerm}
+        getUsersShoes={props.getUsersShoes}
+      />
     </div>
   );
 }

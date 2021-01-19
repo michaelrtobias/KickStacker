@@ -98,7 +98,14 @@ app.put("/shoes", (req, res) => {
 });
 
 app.delete("/shoes", (req, res) => {
-  res.send("delete shoes");
+  models.Shoe.destroy({
+    where: {
+      id: req.query.id,
+    },
+  })
+    .then((result) => res.json(result))
+    .catch((err) => console.log(err))
+    .then(() => console.log(`Shoe ${req.query.id} Deleted`));
 });
 
 app.post("/users", (req, res) => {

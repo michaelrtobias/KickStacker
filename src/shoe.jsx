@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import DeleteShoeButton from "./deleteShoe.jsx";
+
 const ShoeBox = styled.div`
   background-color: #ffd9b3;
   padding: 20px;
@@ -51,6 +53,10 @@ function Shoe(props) {
           {props.shoe.styleCode}
         </div>
       </ShoeText>
+      <DeleteShoeButton
+        id={props.shoe.id}
+        getUsersShoes={props.getUsersShoes}
+      />
     </ShoeBox>
   );
 }
