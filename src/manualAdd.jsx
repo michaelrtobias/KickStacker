@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import UploadImage from "./uploadImage.jsx";
 
+const ManualAddBottomButton = styled.button`
+  margin: 0px 3px 0px 3px;
+`;
+
 function ManualAdd(props) {
   return (
     <div>
@@ -172,8 +176,12 @@ function ManualAdd(props) {
 
       <UploadImage setImageId={props.setImageId} />
 
-      <button onClick={() => props.handlesubmit()}>Add Shoe</button>
-      <button onClick={() => props.setView("dashboard")}>Cancel</button>
+      <ManualAddBottomButton onClick={() => props.handlesubmit()}>
+        Add Shoe
+      </ManualAddBottomButton>
+      <ManualAddBottomButton onClick={() => props.setView("dashboard")}>
+        Cancel
+      </ManualAddBottomButton>
     </div>
   );
 }

@@ -9,13 +9,19 @@ import ManualAdd from "./manualAdd.jsx";
 
 const AddShoeCoulums = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 const RightColumn = styled.div`
   margin-left: 10px;
 `;
-const LeftColumn = styled.div`
-  margin-right: 50px;
+const SearchHeading = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const ViewChangeButton = styled.button`
+  margin-left: 10px;
 `;
 
 function AddShoe(props) {
@@ -54,6 +60,7 @@ function AddShoe(props) {
   const [releaseDate, setReleaseDate] = useState("");
   const [modalimageurl, setmodalimageurl] = useState("");
   const [modalimagealt, setmodalimagealt] = useState("");
+  const [addMethod, setAddMethod] = useState("automated");
 
   const getAllBrands = () => {
     axios("/brands")
@@ -277,89 +284,109 @@ function AddShoe(props) {
   useEffect(() => {
     getModelsForCollection(collectionId || 0);
   }, [modelId]);
-  return (
-    <AddShoeCoulums>
-      <LeftColumn>
-        <h3>Either search for shoe or add manually</h3>
-        <SearchModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-          setshoesize={setshoesize}
-          sizetypes={sizetypes}
-          setsizetype={setsizetype}
-          setshoecolor={setshoecolor}
-          setshoetype={setshoetype}
-          types={types}
-          setshoecut={setshoecut}
-          cuts={cuts}
-          setboxstatus={setboxstatus}
-          setpurchaseprice={setpurchaseprice}
-          setrecieptstatus={setrecieptstatus}
-          setcollaborator={setcollaborator}
-          handlesubmit={handlesubmit}
-          shoename={shoename}
-          stylecode={stylecode}
-          brandname={brandname}
-          shoecolor={shoecolor}
-          searchshoesilhoutte={searchshoesilhoutte}
-          modalimageurl={modalimageurl}
-          modalimagealt={modalimagealt}
-        />
-        <ManualAdd
-          brands={brands}
-          createBrandField={createBrandField}
-          handleCollectionChange={handleCollectionChange}
-          collections={collections}
-          makeCollection={makeCollection}
-          setModelId={setModelId}
-          models={models}
-          makeModel={makeModel}
-          setshoename={setshoename}
-          setShoeNickname={setShoeNickname}
-          setstylecode={setstylecode}
-          setshoesize={setshoesize}
-          setsizetype={setsizetype}
-          sizetypes={sizetypes}
-          setshoecolor={setshoecolor}
-          setshoetype={setshoetype}
-          types={types}
-          setshoecut={setshoecut}
-          cuts={cuts}
-          setboxstatus={setboxstatus}
-          setpurchaseprice={setpurchaseprice}
-          setrecieptstatus={setrecieptstatus}
-          setDescription={setDescription}
-          setcollaborator={setcollaborator}
-          handlesubmit={handlesubmit}
-          setView={props.setView}
-          handleChange={handleChange}
-          setImageId={setImageId}
-        />
-      </LeftColumn>
-      <RightColumn>
-        <SearchAddBar getSneaksData={getSneaksData} />
-        <SearchAddList
-          sneakerSearchList={sneakerSearchList}
-          setshoename={setshoename}
-          setstylecode={setstylecode}
-          setDescription={setDescription}
-          setImageId={setImageId}
-          setModelId={setModelId}
-          setBrandId={setBrandId}
-          brandId={brandId}
-          setCollectionId={setCollectionId}
-          collectionId={collectionId}
-          setModalShow={setModalShow}
-          setshoecolor={setshoecolor}
-          setbrandname={setbrandname}
-          setsearchshoesilhoutte={setsearchshoesilhoutte}
-          setmodalimageurl={setmodalimageurl}
-          setmodalimagealt={setmodalimagealt}
-          setReleaseDate={setReleaseDate}
-        />
-      </RightColumn>
-    </AddShoeCoulums>
-  );
+
+  const renderAddMethod = () => {
+    if (addMethod === "automated") {
+      return (
+        <RightColumn>
+          <SearchHeading>
+            <h3>Search for shoe below or </h3>
+            <ViewChangeButton onClick={() => setAddMethod("manual")}>
+              Add Shoe Manually
+            </ViewChangeButton>
+          </SearchHeading>
+          <SearchModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            setshoesize={setshoesize}
+            sizetypes={sizetypes}
+            setsizetype={setsizetype}
+            setshoecolor={setshoecolor}
+            setshoetype={setshoetype}
+            types={types}
+            setshoecut={setshoecut}
+            cuts={cuts}
+            setboxstatus={setboxstatus}
+            setpurchaseprice={setpurchaseprice}
+            setrecieptstatus={setrecieptstatus}
+            setcollaborator={setcollaborator}
+            handlesubmit={handlesubmit}
+            shoename={shoename}
+            stylecode={stylecode}
+            brandname={brandname}
+            shoecolor={shoecolor}
+            searchshoesilhoutte={searchshoesilhoutte}
+            modalimageurl={modalimageurl}
+            modalimagealt={modalimagealt}
+          />
+          <SearchAddBar getSneaksData={getSneaksData} />
+          <SearchAddList
+            sneakerSearchList={sneakerSearchList}
+            setshoename={setshoename}
+            setstylecode={setstylecode}
+            setDescription={setDescription}
+            setImageId={setImageId}
+            setModelId={setModelId}
+            setBrandId={setBrandId}
+            brandId={brandId}
+            setCollectionId={setCollectionId}
+            collectionId={collectionId}
+            setModalShow={setModalShow}
+            setshoecolor={setshoecolor}
+            setbrandname={setbrandname}
+            setsearchshoesilhoutte={setsearchshoesilhoutte}
+            setmodalimageurl={setmodalimageurl}
+            setmodalimagealt={setmodalimagealt}
+            setReleaseDate={setReleaseDate}
+          />
+        </RightColumn>
+      );
+    } else if (addMethod === "manual") {
+      return (
+        <div>
+          <SearchHeading>
+            <h3>Add shoe below or </h3>
+            <ViewChangeButton onClick={() => setAddMethod("automated")}>
+              Search For Shoe
+            </ViewChangeButton>
+          </SearchHeading>
+          <ManualAdd
+            brands={brands}
+            createBrandField={createBrandField}
+            handleCollectionChange={handleCollectionChange}
+            collections={collections}
+            makeCollection={makeCollection}
+            setModelId={setModelId}
+            models={models}
+            makeModel={makeModel}
+            setshoename={setshoename}
+            setShoeNickname={setShoeNickname}
+            setstylecode={setstylecode}
+            setshoesize={setshoesize}
+            setsizetype={setsizetype}
+            sizetypes={sizetypes}
+            setshoecolor={setshoecolor}
+            setshoetype={setshoetype}
+            types={types}
+            setshoecut={setshoecut}
+            cuts={cuts}
+            setboxstatus={setboxstatus}
+            setpurchaseprice={setpurchaseprice}
+            setrecieptstatus={setrecieptstatus}
+            setDescription={setDescription}
+            setcollaborator={setcollaborator}
+            handlesubmit={handlesubmit}
+            setView={props.setView}
+            handleChange={handleChange}
+            setImageId={setImageId}
+            setAddMethod={setAddMethod}
+          />
+        </div>
+      );
+    }
+  };
+
+  return <AddShoeCoulums>{renderAddMethod()}</AddShoeCoulums>;
 }
 
 export default AddShoe;
