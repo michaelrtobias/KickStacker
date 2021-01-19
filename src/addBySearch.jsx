@@ -11,6 +11,7 @@ function SearchAddBar(props) {
   const [sneaksSearchTerm, setSneaksSearchTerm] = useState("");
 
   useEffect(() => {
+    let isMounted = true;
     props.getSneaksData(sneaksSearchTerm);
   }, [sneaksSearchTerm]);
 

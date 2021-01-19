@@ -12,7 +12,7 @@ function Collection(props) {
             shoe.nickname.toLowerCase().includes(props.searchTerm)
         )
         .map((shoe) => (
-          <Shoe shoe={shoe} key={shoe.id} />
+          <Shoe shoe={shoe} key={shoe.id} getUsersShoes={props.getUsersShoes} />
         ))}
     </div>
   );

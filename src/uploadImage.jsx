@@ -80,7 +80,7 @@ function UploadImage(props) {
         </UploadSuccessful>
       );
     } else {
-      return <button onClick={() => uploadImage()}>Upload Here!</button>;
+      return <button onClick={() => uploadImage()}>Upload Photo Here!</button>;
     }
   };
 
