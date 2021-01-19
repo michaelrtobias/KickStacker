@@ -225,7 +225,6 @@ function AddShoe(props) {
           <button
             onClick={() => {
               createCollection();
-              // setCollectionId("choose");
             }}
           >
             Create Collection
@@ -257,7 +256,6 @@ function AddShoe(props) {
           <button
             onClick={() => {
               createModel();
-              // setModelId(0);
             }}
           >
             Create Model
