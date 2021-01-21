@@ -7,7 +7,20 @@ const DeleteButton = styled.button`
   max-height: 32px;
 `;
 
+const FirstDeleteButton = styled.button`
+  background-color: #6ca6c1;
+  max-height: 32px;
+`;
+
+const DeleteConfirmText = styled.h4`
+  color: black;
+  text-align: center;
+  font-size: 12px;
+`;
+
 function DeleteShoeButton(props) {
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+
   const deleteShoe = (id) => {
     axios
       .delete(`/shoes?id=${id}`)
@@ -15,7 +28,31 @@ function DeleteShoeButton(props) {
       .catch((err) => console.log(err));
   };
 
-  return <DeleteButton onClick={() => deleteShoe(props.id)}>X</DeleteButton>;
+  const deleteConfirmRender = () => {
+    if (deleteConfirm === false) {
+      return (
+        <FirstDeleteButton onClick={() => setDeleteConfirm(true)}>
+          X
+        </FirstDeleteButton>
+      );
+    } else if (deleteConfirm === true) {
+      return (
+        <div>
+          <DeleteConfirmText>
+            Are you sure <br></br>you want to delete?
+          </DeleteConfirmText>
+          <DeleteButton onClick={() => deleteShoe(props.id)}>
+            Delete
+          </DeleteButton>
+          <DeleteButton onClick={() => setDeleteConfirm(false)}>
+            Cancel
+          </DeleteButton>
+        </div>
+      );
+    }
+  };
+
+  return <div>{deleteConfirmRender()}</div>;
 }
 
 export default DeleteShoeButton;

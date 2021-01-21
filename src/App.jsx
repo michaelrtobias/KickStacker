@@ -32,6 +32,12 @@ const HoverWrapper = styled.div`
   }
 `;
 
+const Body = styled.div`
+  background-color: #da7635;
+  height: '100vh',
+  min-height : '100vh'
+`;
+
 function App() {
   const [userId, setUserId] = useState(0);
   const [view, setView] = useState("signin");
@@ -98,7 +104,7 @@ function App() {
   };
 
   return (
-    <div>
+    <Body>
       <h1>Shoe Stacker</h1>
       {view === "signin" ? null : (
         <Header>
@@ -119,7 +125,7 @@ function App() {
       <Background>
         <div>{renderView()}</div>
       </Background>
-    </div>
+    </Body>
   );
 }
 
