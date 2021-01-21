@@ -61,6 +61,8 @@ function AddShoe(props) {
   const [modalimageurl, setmodalimageurl] = useState("");
   const [modalimagealt, setmodalimagealt] = useState("");
   const [addMethod, setAddMethod] = useState("automated");
+  const [sneaksId, setSneaksId] = useState("sneaksId");
+  const [retailPrice, setRetailPrice] = useState("");
 
   const getAllBrands = () => {
     axios("/brands")
@@ -148,6 +150,8 @@ function AddShoe(props) {
         typeId: shoeType,
         collaborator: collaborator,
         releaseDate: releaseDate,
+        sneaksId: sneaksId,
+        retailPrice: retailPrice,
       }),
     })
       .then((res) => res.json())
@@ -264,6 +268,7 @@ function AddShoe(props) {
       );
     }
   };
+
   useEffect(() => {
     getAllBrands();
     getSizeTypes();
@@ -336,6 +341,8 @@ function AddShoe(props) {
             setmodalimageurl={setmodalimageurl}
             setmodalimagealt={setmodalimagealt}
             setReleaseDate={setReleaseDate}
+            setSneaksId={setSneaksId}
+            setRetailPrice={setRetailPrice}
           />
         </RightColumn>
       );
