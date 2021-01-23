@@ -113,6 +113,8 @@ function SearchShoe(props) {
     props.setmodalimageurl(props.shoe.thumbnail);
     props.setmodalimagealt(props.shoe.urlKey);
     props.setReleaseDate(props.shoe.releaseDate);
+    props.setRetailPrice(props.shoe.retailPrice);
+    props.setSneaksId(props.shoe._id);
     AddImage();
     SearchOrAddBrand();
     props.setModalShow(true);

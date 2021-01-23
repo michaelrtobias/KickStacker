@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js",
-    "build": "webpack --config webpack.config.js -w",
+    "buildWatch": "webpack --config webpack.config.js -w",
+    "build": "webpack --config webpack.config.js",
     "startsneaks": "nodemon server/sneaksServer.js"
   },
   "repository": {

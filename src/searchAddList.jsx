@@ -23,6 +23,8 @@ function SearchAddList(props) {
           setmodalimageurl={props.setmodalimageurl}
           setmodalimagealt={props.setmodalimagealt}
           setReleaseDate={props.setReleaseDate}
+          setRetailPrice={props.setRetailPrice}
+          setSneaksId={props.setSneaksId}
         />
       ))}
     </div>

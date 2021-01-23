@@ -124,6 +124,14 @@ const Shoe = db.define("shoes", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  retailPrice: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  sneaksId: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 Collection.belongsTo(Brand);
