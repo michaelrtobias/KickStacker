@@ -16,6 +16,6 @@ phases:
     commands:
       - echo "bundling the applictaion"
       - npm run build
-      - echo "build successful"
+      - echo "build is successful"
       - echo "starting server"
       - npm run start
