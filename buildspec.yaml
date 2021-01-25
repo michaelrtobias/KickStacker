@@ -4,15 +4,18 @@ phases:
   install:
     runtime-versions:
       nodejs: 10
+    commands:
+      - npm install
+      - echo "installing"
   pre-build:
     commands:
-      - echo installing npm packages
+      - echo "installing npm packages"
       - npm install
-      - echo install successful
+      - echo "install successful"
   build:
     commands:
-      - echo bundling the applictaion
+      - echo "bundling the applictaion"
       - npm run build
-      - echo build successful
-      - echo starting server
+      - echo "build successful"
+      - echo "starting server"
       - npm run start
