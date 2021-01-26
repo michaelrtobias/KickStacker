@@ -9,7 +9,9 @@ function Collection(props) {
         .filter(
           (shoe) =>
             shoe.name.toLowerCase().includes(props.searchTerm) ||
-            shoe.nickname.toLowerCase().includes(props.searchTerm)
+            shoe.nickname.toLowerCase().includes(props.searchTerm) ||
+            shoe.brand.name.toLowerCase().includes(props.searchTerm) ||
+            shoe.color.includes(props.searchTerm)
         )
         .map((shoe) => (
           <Shoe shoe={shoe} key={shoe.id} getUsersShoes={props.getUsersShoes} />
