@@ -1,4 +1,3 @@
 # KickStacker
 
-The ultimate sneaker collector dashboard
-
+The ultimate sneaker collector dashboard.
