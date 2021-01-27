@@ -3,8 +3,6 @@ require("dotenv").config(); // Configure dotenv to load in the .env file
 // Configure aws with your accessKeyId and your secretAccessKey
 aws.config.update({
   region: "us-east-1", // Put your aws region here
-  accessKeyId: process.env.AWSAccessKeyId,
-  secretAccessKey: process.env.AWSSecretKey,
 });
 
 const S3_BUCKET = process.env.bucket;
