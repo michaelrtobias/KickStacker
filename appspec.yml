@@ -3,7 +3,7 @@ os: linux
 files:
   - source: KickStacker/public/bundle.js
   destination: /home/ec2-user/KickStacker/public
-  -source: KickStacker/public/index.html
+  - source: KickStacker/public/index.html
   destination: /home/ec2-user/KickStacker/public
 
 hooks:
