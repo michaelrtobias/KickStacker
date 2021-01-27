@@ -1,11 +1,12 @@
 version: 0.0
 os: linux
 files:
-  - source: KickStacker/public/bundle.js
-  destination: /home/ec2-user/KickStacker/public
-  - source: KickStacker/public/index.html
-  destination: /home/ec2-user/KickStacker/public
-
+  # - source: KickStacker/public/bundle.js
+  #   destination: /home/ec2-user/KickStacker/public
+  # - source: KickStacker/public/index.html
+  # destination: /home/ec2-user/KickStacker/public
+  - source: /
+    destination: /home/ec2-user/
 hooks:
   BeforeInstall:
     - location: scripts/before_install.sh
