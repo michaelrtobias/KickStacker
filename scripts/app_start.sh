@@ -1,6 +1,5 @@
 #!/bin/bash
 cd /home/ec2-user/KickStacker
-npm start
 pm2 start npm --name "shoesstacker" -- start
 pm2 startup
 pm2 save
