@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/index.js",
-    "buildWatch": "webpack --config webpack.config.js -w",
+    "start": "node server/index.js",
     "build": "webpack --config webpack.config.js",
+    "startWatch": "nodemon server/index.js",
+    "buildWatch": "webpack --config webpack.config.js -w",
     "startsneaks": "nodemon server/sneaksServer.js",
     "deploy": "aws s3 sync --acl public-read public/ s3://shoesstacker"
   },
