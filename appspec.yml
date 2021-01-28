@@ -1,8 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: KickStacker
-    destination: /home/ec2-user/
+  # - source: KickStacker
+  #   destination: /home/ec2-user/
   - source: /
     destination: /home/ec2-user/
 hooks:
