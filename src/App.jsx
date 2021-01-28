@@ -9,7 +9,6 @@ const Background = styled.div`
   background-color: #ffbf80;
   display: flex;
   justify-content: center;
-  border: 3px solid black;
 `;
 
 const NavButton = styled.div`

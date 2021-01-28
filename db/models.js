@@ -10,6 +10,14 @@ const User = db.define("users", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 const Brand = db.define("brands", {
