@@ -105,7 +105,7 @@ function App() {
 
   return (
     <Body>
-      <h1>Chip Stacker</h1>
+      <h1>Bogie Stacker</h1>
       {view === "signin" ? null : (
         <Header>
           <HoverWrapper>
