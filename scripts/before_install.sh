@@ -1,5 +1,6 @@
 #!/bin/bash
-cd /home/ec2-user/
+cd /home/ec2-user/KickStacker
 curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
 yum -y install nodejs npm
+cd ..
 rm -rf Kickstacker
