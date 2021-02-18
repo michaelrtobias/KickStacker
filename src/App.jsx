@@ -37,9 +37,15 @@ const Body = styled.div`
   min-height : '100vh'
 `;
 
+const Footer = styled.footer`
+  background-color: #da7635;
+  height: '100vh',
+  min-height : '100vh'
+`;
+
 function App() {
   const [userId, setUserId] = useState(0);
-  const [view, setView] = useState("signin");
+  const [view, setView] = useState("dashboard");
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [userSneakers, setUserSneakers] = useState([]);
@@ -99,32 +105,44 @@ function App() {
           getUsersShoes={getUsersShoes}
         />
       );
+    } else if (view === "auth") {
+      return <div>Add authentication page</div>;
+    } else if (view === "profile") {
+      return <div>Add Profile page</div>;
     }
   };
 
   return (
-    <Body>
-      <h1>Shoes Stacker</h1>
-      {view === "signin" ? null : (
-        <Header>
-          <HoverWrapper>
-            <NavButton onClick={() => setView("signin")}>Change User</NavButton>
-          </HoverWrapper>
-          <HoverWrapper>
-            <NavButton onClick={() => setView("dashboard")}>
-              Collection
-            </NavButton>
-          </HoverWrapper>
-          <HoverWrapper>
-            <NavButton onClick={() => setView("addshoe")}>Add Shoe</NavButton>
-          </HoverWrapper>
-        </Header>
-      )}
+    <div>
+      <Body>
+        <h1>Shoes Stacker</h1>
+        {view === "signin" ? null : (
+          <Header>
+            <HoverWrapper>
+              <NavButton onClick={() => setView("signin")}>
+                Change User
+              </NavButton>
+            </HoverWrapper>
+            <HoverWrapper>
+              <NavButton onClick={() => setView("dashboard")}>
+                Collection
+              </NavButton>
+            </HoverWrapper>
+            <HoverWrapper>
+              <NavButton onClick={() => setView("addshoe")}>Add Shoe</NavButton>
+            </HoverWrapper>
+            <HoverWrapper>
+              <NavButton onClick={() => setView("profile")}>Profile</NavButton>
+            </HoverWrapper>
+          </Header>
+        )}
 
-      <Background>
-        <div>{renderView()}</div>
-      </Background>
-    </Body>
+        <Background>
+          <div>{renderView()}</div>
+        </Background>
+      </Body>
+      <Footer></Footer>
+    </div>
   );
 }
 

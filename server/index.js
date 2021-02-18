@@ -169,7 +169,7 @@ app.post("/searchbrands", (req, res) => {
 app.post("/searchcollections", (req, res) => {
   models.Collection.findOrCreate({
     where: {
-      name: req.body.name,
+      name: req.body.name.toLowerCase(),
     },
     defaults: {
       brandId: req.body.brandId,
