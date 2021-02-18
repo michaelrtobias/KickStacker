@@ -357,6 +357,8 @@ bundle.js
 
 .DS_Store
 
+aws_cognito.js
+
 #amplify
 amplify/\#current-cloud-backend
 amplify/.config/local-*
