@@ -43,12 +43,40 @@ const Footer = styled.footer`
   min-height : '100vh'
 `;
 
+// Amplify.configure({
+//   Auth: {
+//     region: process.env.AWS_COGNITO_REGION,
+//     userPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
+//     userPoolWebClientId: process.env.AWS_COGNITO_CLIENT_ID,
+//     cookieStorage: {
+//       path: "/",
+//       expires: "",
+//       domain: window.location.hostname,
+//       secure: false,
+//     },
+//     oauth: {
+//       domain: process.env.AWS_COGNITO_DOMAIN,
+//       scope: [
+//         "phone",
+//         "email",
+//         "profile",
+//         "openid",
+//         "aws.cognito.signin.user.admin",
+//       ],
+//       responseType: "code",
+//       redicectSiginIn: "http://localhost:5000/login",
+//       redicectSiginIn: "http://localhost:5000/signout",
+//     },
+//   },
+// });
+
 function App() {
   const [userId, setUserId] = useState(0);
-  const [view, setView] = useState("dashboard");
+  const [view, setView] = useState("signin");
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [userSneakers, setUserSneakers] = useState([]);
+  const [authUser, setAuthUser] = useState(null);
 
   const getAllUsers = () => {
     axios("/users")
@@ -70,6 +98,10 @@ function App() {
       .then((shoes) => setUserSneakers(shoes))
       .catch((err) => console.log(err));
   };
+
+  // useEffect(() => {
+  //   getAllUsers();
+  // }, []);
 
   useEffect(() => {
     getAllUsers();
