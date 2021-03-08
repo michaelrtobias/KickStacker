@@ -15,7 +15,7 @@ function Dashboard(props) {
   }, []);
   return (
     <div>
-      <h3>{props.user.firstName}'s Dashboard</h3>
+      {/* <h3>{props.user.firstName}'s Dashboard</h3> */}
 
       <SearchBar setSearchTerm={setSearchTerm}></SearchBar>
       <Collection
