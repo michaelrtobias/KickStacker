@@ -47,7 +47,6 @@
     "request": "^2.88.2",
     "sequelize": "^6.6.2",
     "sneaks-api": "git+https://github.com/michaelrtobias/Sneaks-API.git",
-    "snyk": "^1.509.0",
     "stockx-api": "^1.0.9",
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.1"
