@@ -88,8 +88,8 @@ function AddShoe(props) {
   const getSneaksData = (term) => {
     axios
       .get(
-        `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/sneaks?term=${term}`,
-        // "/sneakerdata",
+        // `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/sneaks?term=${term}`,
+        "/sneakerdata",
         {
           params: {
             term: term,
