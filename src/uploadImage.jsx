@@ -27,10 +27,13 @@ function UploadImage(props) {
 
     console.log("Preparing the upload");
     axios
-      .post("/upload/image", {
-        fileName: file.name,
-        fileType: file.type,
-      })
+      .post(
+        "https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/image/upload",
+        {
+          fileName: file.name,
+          fileType: file.type,
+        }
+      )
       .then((response) => {
         var returnedData = response.data.data.returnData;
         var signedRequest = returnedData.signedRequest;

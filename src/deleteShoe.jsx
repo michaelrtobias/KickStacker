@@ -23,7 +23,9 @@ function DeleteShoeButton(props) {
 
   const deleteShoe = (id) => {
     axios
-      .delete(`/shoes?id=${id}`)
+      .delete(
+        `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users/${props.userId}/shoes/${id}`
+      )
       .then(() => props.getUsersShoes())
       .catch((err) => console.log(err));
   };

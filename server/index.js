@@ -9,7 +9,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // const awsroutes = require("./awsroutes.js");
 // const db = require('../db/index.js');
-const db = require("../db/controllers/users.js");
 const models = require("../db/models.js");
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));

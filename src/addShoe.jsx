@@ -65,14 +65,16 @@ function AddShoe(props) {
   const [retailPrice, setRetailPrice] = useState("");
 
   const getAllBrands = () => {
-    axios("/brands")
+    axios("https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands")
       .then((res) => res.data)
       .then((brands) => setBrands(brands))
       .catch((err) => console.log(err));
   };
 
   const getAllCollectionsForBrand = (id) => {
-    axios(`/collections?brandId=${id}`)
+    axios(
+      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${id}/collections`
+    )
       .then((res) => res.data)
       .then((collections) => setCollections(collections))
       .catch((err) => console.log(err));
@@ -85,75 +87,84 @@ function AddShoe(props) {
 
   const getSneaksData = (term) => {
     axios
-      .get("/sneakerdata", {
-        params: {
-          term: term,
-        },
-      })
+      .get(
+        `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/sneaks?term=${term}`,
+        // "/sneakerdata",
+        {
+          params: {
+            term: term,
+          },
+        }
+      )
       .then((res) => res.data)
       .then((shoes) => setSneakerSearchList(shoes))
       .catch((err) => console.log(err));
   };
 
   const getModelsForCollection = (id) => {
-    axios(`/models?collectionId=${id}`)
+    axios(
+      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${brandId}/collections/${id}`
+    )
       .then((res) => res.data)
       .then((models) => setModels(models))
       .catch((err) => console.log(err));
   };
   const getSizeTypes = () => {
-    axios(`/sizeTypes`)
+    axios(`https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/sizetype`)
       .then((res) => res.data)
       .then((sizeType) => setsizetypes(sizeType))
       .catch((err) => console.log(err));
   };
 
   const getAllCuts = () => {
-    axios("/cuts")
+    axios("https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/cuts")
       .then((res) => res.data)
       .then((cuts) => setCuts(cuts))
       .catch((err) => console.log(err));
   };
 
   const getAllTypes = () => {
-    axios("/types")
+    axios("https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/types")
       .then((res) => res.data)
       .then((types) => setTypes(types))
       .catch((err) => console.log(err));
   };
 
   const addShoe = () => {
-    fetch("/shoes", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: shoename,
-        styleCode: stylecode,
-        color: shoecolor,
-        size: shoeSize,
-        sizetypeId: sizetype,
-        boxStatus: boxstatus,
-        imageId: imageId,
-        wears: wears,
-        purchasePrice: purchaseprice,
-        description: description,
-        receipt: recieptstatus,
-        nickname: shoeNickname,
-        modelId: modelId,
-        brandId: brandId,
-        userId: props.userId,
-        collectionId: collectionId,
-        cutId: shoecut,
-        typeId: shoeType,
-        collaborator: collaborator,
-        releaseDate: releaseDate,
-        sneaksId: sneaksId,
-        retailPrice: retailPrice,
-      }),
-    })
+    fetch(
+      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users/${props.userId}/shoes`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: shoename,
+          styleCode: stylecode,
+          color: shoecolor,
+          size: shoeSize,
+          sizetypeId: sizetype,
+          boxStatus: boxstatus,
+          imageId: imageId,
+          wears: wears,
+          purchasePrice: purchaseprice,
+          description: description,
+          receipt: recieptstatus,
+          nickname: shoeNickname,
+          modelId: modelId,
+          brandId: brandId,
+          userId: props.userId,
+          collectionId: collectionId,
+          cutId: shoecut,
+          typeId: shoeType,
+          collaborator: collaborator,
+          releaseDate: releaseDate,
+          sneaksId: sneaksId,
+          retailPrice: retailPrice,
+        }),
+      }
+    )
       .then((res) => res.json())
       .catch((err) => console.log(err))
       .then((shoe) => props.getUsersShoes(shoe.userId));
@@ -175,10 +186,13 @@ function AddShoe(props) {
 
   const createBrand = () => {
     axios
-      .post("/brands", {
-        name: newBrand,
-        headquarters: brandHeadquarters,
-      })
+      .post(
+        "https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands",
+        {
+          name: newBrand,
+          headquarters: brandHeadquarters,
+        }
+      )
       .then((res) => console.log(res.data));
   };
 
@@ -210,10 +224,13 @@ function AddShoe(props) {
   };
   const createCollection = () => {
     axios
-      .post("/collections", {
-        name: newCollection,
-        brandId: brandId,
-      })
+      .post(
+        `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${brandId}/collections`,
+        {
+          name: newCollection,
+          brandId: brandId,
+        }
+      )
       .then((res) => setCollectionId(res.data.id));
   };
 
@@ -240,11 +257,14 @@ function AddShoe(props) {
 
   const createModel = () => {
     axios
-      .post("/models", {
-        name: newModel,
-        brandId: brandId,
-        collectionId: collectionId,
-      })
+      .post(
+        `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${brandId}/collections/${collectionId}/models`,
+        {
+          name: newModel,
+          brandId: brandId,
+          collectionId: collectionId,
+        }
+      )
       .then((res) => setModelId(res.data.id));
   };
 

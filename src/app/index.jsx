@@ -62,33 +62,6 @@ const Spinner = styled.div`
   100% { transform: rotate(360deg); }
 `;
 
-// Amplify.configure({
-//   Auth: {
-//     region: process.env.AWS_COGNITO_REGION,
-//     userPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
-//     userPoolWebClientId: process.env.AWS_COGNITO_CLIENT_ID,
-//     cookieStorage: {
-//       path: "/",
-//       expires: "",
-//       domain: window.location.hostname,
-//       secure: false,
-//     },
-//     oauth: {
-//       domain: process.env.AWS_COGNITO_DOMAIN,
-//       scope: [
-//         "phone",
-//         "email",
-//         "profile",
-//         "openid",
-//         "aws.cognito.signin.user.admin",
-//       ],
-//       responseType: "code",
-//       redicectSiginIn: "http://localhost:5000/login",
-//       redicectSiginIn: "http://localhost:5000/signout",
-//     },
-//   },
-// });
-
 function App() {
   const [userId, setUserId] = useState(0);
   const [view, setView] = useState("signin");
@@ -98,29 +71,34 @@ function App() {
   const [authUser, setAuthUser] = useState(null);
 
   const getAllUsers = () => {
-    axios("/users")
+    axios("https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+    })
       .then((res) => res.data)
       .then((users) => setUsers(users))
       .catch((err) => console.log(err));
   };
 
   const getUserById = (id) => {
-    axios(`users/user?userId=${id}`)
+    axios(
+      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users/${id}`
+    )
       .then((res) => res.data[0])
       .then((user) => setUser(user))
       .catch((err) => console.log(err));
   };
 
   const getUsersShoes = () => {
-    axios(`/user?userId=${userId}`)
+    axios(
+      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users/${userId}/shoes`
+    )
       .then((res) => res.data)
       .then((shoes) => setUserSneakers(shoes))
       .catch((err) => console.log(err));
   };
-
-  // useEffect(() => {
-  //   getAllUsers();
-  // }, []);
 
   useEffect(() => {
     getAllUsers();

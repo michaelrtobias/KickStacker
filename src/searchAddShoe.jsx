@@ -38,11 +38,14 @@ function SearchShoe(props) {
 
   const AddImage = (req, res) => {
     axios
-      .post("/images", {
-        name: props.shoe.shoeName,
-        url: props.shoe.thumbnail,
-        alt: props.shoe.urlKey,
-      })
+      .post(
+        `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/images`,
+        {
+          name: props.shoe.shoeName,
+          url: props.shoe.thumbnail,
+          alt: props.shoe.urlKey,
+        }
+      )
       .then((res) => {
         props.setImageId(res.data.id);
       })
@@ -54,9 +57,12 @@ function SearchShoe(props) {
 
   const SearchOrAddBrand = (req, res) => {
     axios
-      .post("/searchbrands", {
-        name: props.shoe.brand,
-      })
+      .post(
+        "https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/search",
+        {
+          name: props.shoe.brand,
+        }
+      )
       .then((res) => {
         props.setBrandId(res.data[0].id);
         const infoObj = { brandId: res.data[0].id };
@@ -64,10 +70,12 @@ function SearchShoe(props) {
       })
       .then((infoObj) => {
         axios
-          .post("/searchcollections", {
-            name: props.shoe.make,
-            brandId: infoObj.brandId,
-          })
+          .post(
+            `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${infoObj.brandId}/collections/search`,
+            {
+              name: props.shoe.make,
+            }
+          )
           .then((res) => {
             props.setCollectionId(res.data[0].id);
             infoObj.collectionId = res.data[0].id;
@@ -75,11 +83,14 @@ function SearchShoe(props) {
           })
           .then((infoObj) => {
             axios
-              .post("/searchmodels", {
-                name: props.shoe.silhoutte,
-                brandId: infoObj.brandId,
-                collectionId: infoObj.collectionId,
-              })
+              .post(
+                `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${infoObj.brandId}/collections/${infoObj.collectionId}/models/search`,
+                {
+                  name: props.shoe.silhoutte,
+                  brandId: infoObj.brandId,
+                  collectionId: infoObj.collectionId,
+                }
+              )
               .then((res) => {
                 props.setModelId(res.data[0].id);
               })
@@ -93,10 +104,13 @@ function SearchShoe(props) {
 
   const SearchOrAddCollection = (req, res) => {
     axios
-      .post("/searchcollections", {
-        name: props.shoe.make,
-        brandId: props.brandId,
-      })
+      .post(
+        "https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${brandID}/collections/search",
+        {
+          name: props.shoe.make,
+          brandId: props.brandId,
+        }
+      )
       .then((res) => {
         props.setCollectionId(res.data[0].id);
       })
