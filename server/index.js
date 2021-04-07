@@ -327,7 +327,6 @@ app.post("/upload/image", (req, res) => {
     if (err) {
       throw err;
     } else {
-      debugger;
       const returnData = {
         signedRequest: url,
         url: `https://${S3_Bucket}.s3.amazonaws.com/${fileName}`,

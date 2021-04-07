@@ -103,7 +103,7 @@ function AddShoe(props) {
 
   const getModelsForCollection = (id) => {
     axios(
-      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${brandId}/collections/${id}`
+      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${brandId}/collections/${id}/models`
     )
       .then((res) => res.data)
       .then((models) => setModels(models))

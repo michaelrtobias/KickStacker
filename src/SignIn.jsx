@@ -23,10 +23,13 @@ function SignIn(props) {
   };
 
   const createUser = () => {
-    axios.post("/users", {
-      firstName: newUserFirstName,
-      lastName: newUserLastName,
-    });
+    axios.post(
+      "https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users",
+      {
+        firstName: newUserFirstName,
+        lastName: newUserLastName,
+      }
+    );
   };
 
   const makeUser = () => {

@@ -102,20 +102,20 @@ function SearchShoe(props) {
       .catch((err) => console.log(err));
   };
 
-  const SearchOrAddCollection = (req, res) => {
-    axios
-      .post(
-        "https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${brandID}/collections/search",
-        {
-          name: props.shoe.make,
-          brandId: props.brandId,
-        }
-      )
-      .then((res) => {
-        props.setCollectionId(res.data[0].id);
-      })
-      .catch((err) => console.log(err));
-  };
+  // const SearchOrAddCollection = (req, res) => {
+  //   axios
+  //     .post(
+  //       `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${props.brandId}/collections/search`,
+  //       {
+  //         name: props.shoe.make,
+  //         brandId: props.brandId,
+  //       }
+  //     )
+  //     .then((res) => {
+  //       props.setCollectionId(res.data[0].id);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   const SearchAddClick = () => {
     props.setshoename(props.shoe.shoeName);
@@ -133,10 +133,6 @@ function SearchShoe(props) {
     SearchOrAddBrand();
     props.setModalShow(true);
   };
-
-  // useEffect(() => {
-  //   SearchOrAddCollection();
-  // }, [props.brandId]);
 
   return (
     <HoverShoe>
