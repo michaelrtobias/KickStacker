@@ -22,6 +22,7 @@ function Dashboard(props) {
         userSneakers={props.userSneakers}
         searchTerm={searchTerm}
         getUsersShoes={props.getUsersShoes}
+        userId={props.userId}
       />
     </div>
   );

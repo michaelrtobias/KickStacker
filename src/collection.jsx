@@ -14,7 +14,12 @@ function Collection(props) {
             shoe.color.includes(props.searchTerm)
         )
         .map((shoe) => (
-          <Shoe shoe={shoe} key={shoe.id} getUsersShoes={props.getUsersShoes} />
+          <Shoe
+            shoe={shoe}
+            key={shoe.id}
+            getUsersShoes={props.getUsersShoes}
+            userId={props.userId}
+          />
         ))}
     </div>
   );

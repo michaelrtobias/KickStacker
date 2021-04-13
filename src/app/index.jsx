@@ -141,14 +141,14 @@ function App() {
     } else if (view === "auth") {
       return <div>Add authentication page</div>;
     } else if (view === "profile") {
-      return <div>Add Profile page</div>;
+      return <div>Profile Page Coming Soon!</div>;
     }
   };
 
   return (
     <div>
       <Body>
-        <h1>Shoes Stacker</h1>
+        <h1>Shoes Stacker Serverless</h1>
         {view === "signin" ? null : (
           <Header>
             <HoverWrapper>

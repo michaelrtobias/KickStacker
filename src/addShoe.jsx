@@ -298,6 +298,8 @@ function AddShoe(props) {
 
   useEffect(() => {
     getAllBrands();
+    getAllTypes();
+    getAllCuts();
   }, [brandId]);
 
   useEffect(() => {

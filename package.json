@@ -10,7 +10,7 @@
     "startWatch": "nodemon server/index.js",
     "buildWatch": "webpack --config webpack.config.js -w",
     "startsneaks": "nodemon server/sneaksServer.js",
-    "deploy": "aws s3 sync --acl public-read public/ s3://shoesstacker",
+    "deploy": "aws s3 sync --acl public-read public/ s3://shoesstacker.com",
     "buildDeploy": "npm run build && npm run deploy"
   },
   "repository": {

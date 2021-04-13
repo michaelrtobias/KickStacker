@@ -28,14 +28,15 @@ function UploadImage(props) {
     console.log("Preparing the upload");
     axios
       .post(
-        "https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/image/upload",
+        "https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/images/upload",
         {
           fileName: file.name,
           fileType: file.type,
         }
       )
       .then((response) => {
-        var returnedData = response.data.data.returnData;
+        debugger;
+        var returnedData = response.data;
         var signedRequest = returnedData.signedRequest;
         var url = returnedData.url;
         setUrl(url);
@@ -45,6 +46,7 @@ function UploadImage(props) {
             "Content-Type": file.type,
           },
         };
+        debugger;
         axios
           .put(signedRequest, file, options)
           .then((result) => {

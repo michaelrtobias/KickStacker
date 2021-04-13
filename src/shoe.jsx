@@ -55,6 +55,7 @@ function Shoe(props) {
       </ShoeText>
       <DeleteShoeButton
         id={props.shoe.id}
+        userId={props.userId}
         getUsersShoes={props.getUsersShoes}
       />
     </ShoeBox>
