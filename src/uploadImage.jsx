@@ -9,7 +9,7 @@ const UploadSuccessful = styled.button`
 
 function UploadImage(props) {
   const [uploadClicked, setUploadClicked] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState("");
+  // const [uploadedFile, setUploadedFile] = useState("");
   const [URL, setUrl] = useState("");
   const [success, setSuccess] = useState(false);
   const [uploadInput, setUploadInput] = useState("");
@@ -35,7 +35,6 @@ function UploadImage(props) {
         }
       )
       .then((response) => {
-        debugger;
         var returnedData = response.data;
         var signedRequest = returnedData.signedRequest;
         var url = returnedData.url;
@@ -46,7 +45,6 @@ function UploadImage(props) {
             "Content-Type": file.type,
           },
         };
-        debugger;
         axios
           .put(signedRequest, file, options)
           .then((result) => {

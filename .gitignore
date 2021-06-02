@@ -378,10 +378,11 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 
-# lambda practice
-server/lambda/
 
-/server/lambda/
+
+
+server/
+
 
 
 

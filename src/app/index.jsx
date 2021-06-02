@@ -4,6 +4,7 @@ import SignIn from "../SignIn.jsx";
 import Dashboard from "../dashboard.jsx";
 import AddShoe from "../addShoe.jsx";
 import styled from "styled-components";
+import LoadingZone from "../loadingZone/index.jsx";
 
 const Background = styled.div`
   background-color: #ffbf80;
@@ -41,25 +42,6 @@ const Footer = styled.footer`
   background-color: #da7635;
   height: '100vh',
   min-height : '100vh'
-`;
-
-const LoadingZone = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const Spinner = styled.div`
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 `;
 
 function App() {
@@ -115,9 +97,7 @@ function App() {
           getAllUsers={getAllUsers}
         />
       ) : (
-        <LoadingZone>
-          <Spinner></Spinner>
-        </LoadingZone>
+        <LoadingZone />
       );
     } else if (view === "dashboard") {
       return (
@@ -138,17 +118,13 @@ function App() {
           getUsersShoes={getUsersShoes}
         />
       );
-    } else if (view === "auth") {
-      return <div>Add authentication page</div>;
-    } else if (view === "profile") {
-      return <div>Profile Page Coming Soon!</div>;
     }
   };
 
   return (
     <div>
       <Body>
-        <h1>Shoes Stacker Serverless</h1>
+        <h1>Shoes Stacker</h1>
         {view === "signin" ? null : (
           <Header>
             <HoverWrapper>
@@ -163,9 +139,6 @@ function App() {
             </HoverWrapper>
             <HoverWrapper>
               <NavButton onClick={() => setView("addshoe")}>Add Shoe</NavButton>
-            </HoverWrapper>
-            <HoverWrapper>
-              <NavButton onClick={() => setView("profile")}>Profile</NavButton>
             </HoverWrapper>
           </Header>
         )}

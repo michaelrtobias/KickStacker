@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SearchModal from "./searchConfirmPopupModal.jsx";
 import UploadImage from "./uploadImage.jsx";
 import SearchAddBar from "./addBySearch.jsx";
-import SearchAddList from "./searchAddList.jsx";
+import SearchAddList from "./searchAddList 2.jsx";
 import ManualAdd from "./manualAdd.jsx";
 
 const AddShoeCoulums = styled.div`
@@ -60,7 +60,7 @@ function AddShoe(props) {
   const [releaseDate, setReleaseDate] = useState("");
   const [modalimageurl, setmodalimageurl] = useState("");
   const [modalimagealt, setmodalimagealt] = useState("");
-  const [addMethod, setAddMethod] = useState("automated");
+  const [addMethod, setAddMethod] = useState("manual");
   const [sneaksId, setSneaksId] = useState("sneaksId");
   const [retailPrice, setRetailPrice] = useState("");
 
@@ -88,8 +88,7 @@ function AddShoe(props) {
   const getSneaksData = (term) => {
     axios
       .get(
-        // `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/sneaks?term=${term}`,
-        "/sneakerdata",
+        `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/sneaks?term=${term}`,
         {
           params: {
             term: term,
@@ -372,10 +371,7 @@ function AddShoe(props) {
       return (
         <div>
           <SearchHeading>
-            <h3>Add shoe below or </h3>
-            <ViewChangeButton onClick={() => setAddMethod("automated")}>
-              Search For Shoe
-            </ViewChangeButton>
+            <h3>Add shoe below</h3>
           </SearchHeading>
           <ManualAdd
             brands={brands}

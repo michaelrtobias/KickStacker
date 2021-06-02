@@ -22,7 +22,6 @@ function DeleteShoeButton(props) {
   const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   const deleteShoe = (id) => {
-    debugger;
     axios
       .delete(
         `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users/${props.userId}/shoes/${id}`
