@@ -1,6 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app/index.jsx";
+import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
+import store from "./redux/store.js";
 
-ReactDOM.render(<App />, document.getElementById("app"));
+import { handleShoeData } from "./redux/shoeSlice.js";
+
+store.dispatch(handleShoeData);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("app")
+);

@@ -1,18 +1,10 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import axios from "axios";
+import shoeReducer from "./shoeSlice.js";
 
-const reducer = (
-  state = {
-    shoes: "some shoes",
-  }, action
-) => {
-  switch (action.type) {
-    case 'counter/incremented':
-      return { value: state.value + 1 }
-    default:
-      return state
-  }
-};
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
+const store = createStore(shoeReducer, composedEnhancer);
 
-export default const store = createStore(reducer);
-
-
+export default store;

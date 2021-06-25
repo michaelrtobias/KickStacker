@@ -25,19 +25,6 @@ const ShoePic = styled.img`
 function Shoe(props) {
   const [shoeURL, setShoeURL] = useState("");
 
-  // const authorizeImage = () => {
-  //   fetch(props.shoe.image.url, {
-  //     "x-amz-server-side-encryption": "AES256",
-  //   })
-  //     .then((res) => res.blob())
-  //     .then(() => console.log("shoe image unlocked"))
-  //     .then((blob) => setShoeURL(URL.createObjectURL(blob)));
-  // };
-
-  // useEffect(() => {
-  //   authorizeImage();
-  // }, []);
-
   return (
     <ShoeBox>
       <ShoePic src={props.shoe.image.url} alt={props.shoe.image.alt}></ShoePic>
@@ -53,11 +40,7 @@ function Shoe(props) {
           {props.shoe.styleCode}
         </div>
       </ShoeText>
-      <DeleteShoeButton
-        id={props.shoe.id}
-        userId={props.userId}
-        getUsersShoes={props.getUsersShoes}
-      />
+      <DeleteShoeButton id={props.shoe.id} userId={props.userId} />
     </ShoeBox>
   );
 }

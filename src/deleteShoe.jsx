@@ -26,7 +26,6 @@ function DeleteShoeButton(props) {
       .delete(
         `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users/${props.userId}/shoes/${id}`
       )
-      .then(() => props.getUsersShoes())
       .catch((err) => console.log(err));
   };
 

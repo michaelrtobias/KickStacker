@@ -22,29 +22,16 @@ function Dashboard(props) {
       .then((user) => setUser(user))
       .catch((err) => console.log(err));
   };
-  const getUsersShoes = () => {
-    axios(
-      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users/${props.userId}/shoes`
-    )
-      .then((res) => res.data)
-      .then((shoes) => setUserSneakers(shoes))
-      .catch((err) => console.log(err));
-  };
+
   useEffect(() => {
     getUserById(props.userId);
-    getUsersShoes();
   }, []);
   return (
     <div>
       {/* <h3>{props.user.firstName}'s Dashboard</h3> */}
 
       <SearchBar setSearchTerm={setSearchTerm}></SearchBar>
-      <Collection
-        userSneakers={userSneakers}
-        searchTerm={searchTerm}
-        getUsersShoes={getUsersShoes}
-        userId={props.userId}
-      />
+      <Collection searchTerm={searchTerm} userId={props.userId} />
     </div>
   );
 }

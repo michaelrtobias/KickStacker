@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Shoe from "./shoe.jsx";
 import LoadingZone from "./loadingZone/index.jsx";
+import { useSelector } from "react-redux";
+
+const userShoes = (state) => state.shoes;
 
 function Collection(props) {
+  const userSneakers = useSelector(userShoes);
   return (
     <div>
       <h3>Collection</h3>
-      {props.userSneakers.length > 0 ? (
-        props.userSneakers
+      {userSneakers.length > 0 ? (
+        userSneakers
           .filter(
             (shoe) =>
               shoe.name.toLowerCase().includes(props.searchTerm) ||
@@ -16,12 +20,7 @@ function Collection(props) {
               shoe.color.includes(props.searchTerm)
           )
           .map((shoe) => (
-            <Shoe
-              shoe={shoe}
-              key={shoe.id}
-              getUsersShoes={props.getUsersShoes}
-              userId={props.userId}
-            />
+            <Shoe shoe={shoe} key={shoe.id} userId={props.userId} />
           ))
       ) : (
         <LoadingZone />
