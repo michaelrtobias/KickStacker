@@ -89,6 +89,7 @@ function AddShoe(props) {
     axios
       .get(
         `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/sneaks?term=${term}`,
+        // "/sneakerdata",
         {
           params: {
             term: term,
@@ -371,6 +372,11 @@ function AddShoe(props) {
       return (
         <div>
           <SearchHeading>
+            {/* <h3>Add shoe below or </h3>
+            <ViewChangeButton onClick={() => setAddMethod("automated")}>
+              Search For Shoe
+            </ViewChangeButton> */}
+
             <h3>Add shoe below</h3>
           </SearchHeading>
           <ManualAdd

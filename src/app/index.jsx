@@ -5,6 +5,17 @@ import Dashboard from "../dashboard.jsx";
 import AddShoe from "../addShoe.jsx";
 import styled from "styled-components";
 import LoadingZone from "../loadingZone/index.jsx";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink,
+} from "react-router-dom";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { LinkContainer } from "react-router-bootstrap";
 
 const Background = styled.div`
   background-color: #ffbf80;
@@ -45,107 +56,40 @@ const Footer = styled.footer`
 `;
 
 function App() {
-  const [userId, setUserId] = useState(0);
-  const [view, setView] = useState("signin");
-  const [users, setUsers] = useState([]);
+  const [userId, setUserId] = useState(1);
   const [user, setUser] = useState({});
-  const [userSneakers, setUserSneakers] = useState([]);
-  const [authUser, setAuthUser] = useState(null);
-
-  const getAllUsers = () => {
-    axios("https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "cors",
-    })
-      .then((res) => res.data)
-      .then((users) => setUsers(users))
-      .catch((err) => console.log(err));
-  };
-
-  const getUserById = (id) => {
-    axios(
-      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users/${id}`
-    )
-      .then((res) => res.data[0])
-      .then((user) => setUser(user))
-      .catch((err) => console.log(err));
-  };
-
-  const getUsersShoes = () => {
-    axios(
-      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users/${userId}/shoes`
-    )
-      .then((res) => res.data)
-      .then((shoes) => setUserSneakers(shoes))
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    getAllUsers();
-  }, []);
-
-  const renderView = () => {
-    if (view === "signin") {
-      return users.length > 0 ? (
-        <SignIn
-          users={users}
-          setUserId={setUserId}
-          setView={setView}
-          getUserById={getUserById}
-          getAllUsers={getAllUsers}
-        />
-      ) : (
-        <LoadingZone />
-      );
-    } else if (view === "dashboard") {
-      return (
-        <Dashboard
-          getUserById={getUserById}
-          user={user}
-          userId={userId}
-          setView={setView}
-          getUsersShoes={getUsersShoes}
-          userSneakers={userSneakers}
-        />
-      );
-    } else if (view === "addshoe") {
-      return (
-        <AddShoe
-          setView={setView}
-          userId={userId}
-          getUsersShoes={getUsersShoes}
-        />
-      );
-    }
-  };
-
   return (
     <div>
       <Body>
         <h1>Shoes Stacker</h1>
-        {view === "signin" ? null : (
-          <Header>
-            <HoverWrapper>
-              <NavButton onClick={() => setView("signin")}>
-                Change User
-              </NavButton>
-            </HoverWrapper>
-            <HoverWrapper>
-              <NavButton onClick={() => setView("dashboard")}>
-                Collection
-              </NavButton>
-            </HoverWrapper>
-            <HoverWrapper>
-              <NavButton onClick={() => setView("addshoe")}>Add Shoe</NavButton>
-            </HoverWrapper>
-          </Header>
-        )}
 
-        <Background>
-          <div>{renderView()}</div>
-        </Background>
+        <Router>
+          <Navbar bg="dark" variant="dark" expand="md" sticky="top">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link as={NavLink} to="/" exact>
+                  Collection
+                </Nav.Link>
+
+                <Nav.Link as={NavLink} to="/addshoe">
+                  Add A Shoe
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(props) => <Dashboard userId={userId} />}
+            ></Route>
+            <Route
+              path="/addshoe"
+              render={(props) => <AddShoe userId={userId} />}
+            ></Route>
+          </Switch>
+        </Router>
       </Body>
       <Footer></Footer>
     </div>

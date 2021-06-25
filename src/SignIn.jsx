@@ -32,6 +32,18 @@ function SignIn(props) {
     );
   };
 
+  const getAllUsers = () => {
+    axios("https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/users", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+    })
+      .then((res) => res.data)
+      .then((users) => setUsers(users))
+      .catch((err) => console.log(err));
+  };
+
   const makeUser = () => {
     if (chosenUser === "0") {
       return (
@@ -48,7 +60,7 @@ function SignIn(props) {
           <button
             onClick={() => {
               createUser();
-              props.getAllUsers();
+              getAllUsers();
               setChosenUser("choose");
             }}
           >
@@ -59,6 +71,9 @@ function SignIn(props) {
     }
   };
 
+  useEffect(() => {
+    getAllUsers();
+  }, []);
   return (
     <SignInWrapper>
       <select
