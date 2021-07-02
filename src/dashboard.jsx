@@ -3,16 +3,16 @@ import Collection from "./collection.jsx";
 import styled from "styled-components";
 import SearchBar from "./search.jsx";
 import axios from "axios";
+
+import store from "./redux/store.js";
+
+import { handleShoeData } from "./redux/shoes/shoeSlice.js";
+
 function Dashboard(props) {
   const [searchTerm, setSearchTerm] = useState("");
   const [userSneakers, setUserSneakers] = useState([]);
   const [userId, setUserId] = useState(1);
   const [user, setUser] = useState({});
-
-  const handleClickAddShoe = () => {
-    // props.setView("addshoe");
-    // add history function
-  };
 
   const getUserById = (id) => {
     axios(
@@ -24,12 +24,11 @@ function Dashboard(props) {
   };
 
   useEffect(() => {
-    getUserById(props.userId);
+    store.dispatch(handleShoeData);
+    store.getState();
   }, []);
   return (
     <div>
-      {/* <h3>{props.user.firstName}'s Dashboard</h3> */}
-
       <SearchBar setSearchTerm={setSearchTerm}></SearchBar>
       <Collection searchTerm={searchTerm} userId={props.userId} />
     </div>

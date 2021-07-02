@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import SignIn from "../SignIn.jsx";
 import Dashboard from "../dashboard.jsx";
 import AddShoe from "../addShoe.jsx";
 import styled from "styled-components";
@@ -16,6 +15,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { LinkContainer } from "react-router-bootstrap";
+import { useHistory } from "react-router-dom";
 
 const Background = styled.div`
   background-color: #ffbf80;
@@ -58,6 +58,7 @@ const Footer = styled.footer`
 function App() {
   const [userId, setUserId] = useState(1);
   const [user, setUser] = useState({});
+  const history = useHistory();
   return (
     <div>
       <Body>
@@ -79,15 +80,8 @@ function App() {
             </Navbar.Collapse>
           </Navbar>
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={(props) => <Dashboard userId={userId} />}
-            ></Route>
-            <Route
-              path="/addshoe"
-              render={(props) => <AddShoe userId={userId} />}
-            ></Route>
+            <Route exact path="/" component={Dashboard}></Route>
+            <Route path="/addshoe" component={AddShoe}></Route>
           </Switch>
         </Router>
       </Body>

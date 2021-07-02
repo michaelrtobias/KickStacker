@@ -1,4 +1,4 @@
-import store from "./store.js";
+import store from "../store.js";
 import axios from "axios";
 
 const REQUESTING_SHOE_DATA = "SHOES/REQUESTING_DATA";

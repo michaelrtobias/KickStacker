@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import SearchModal from "./searchConfirmPopupModal.jsx";
 import UploadImage from "./uploadImage.jsx";
-import SearchAddBar from "./addBySearch.jsx";
-import SearchAddList from "./searchAddList 2.jsx";
 import ManualAdd from "./manualAdd.jsx";
+import { handleBrandData } from "./redux/brands/brandsSlice.js";
+import { handleCutsData } from "./redux/cuts/cutsThunks.js";
+import store from "./redux/store.js";
+
+const AddForm = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: coulmn;
+`;
 
 const AddShoeCoulums = styled.div`
   display: flex;
@@ -14,11 +20,7 @@ const AddShoeCoulums = styled.div`
 const RightColumn = styled.div`
   margin-left: 10px;
 `;
-const SearchHeading = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
+const SearchHeading = styled.div``;
 
 const ViewChangeButton = styled.button`
   margin-left: 10px;
@@ -29,7 +31,6 @@ function AddShoe(props) {
   const [searchshoesilhoutte, setsearchshoesilhoutte] = useState("");
   const [brandname, setbrandname] = useState("");
   const [brands, setBrands] = useState([]);
-  const [brandId, setBrandId] = useState(null);
   const [collections, setCollections] = useState([]);
   const [collectionId, setCollectionId] = useState(null);
   const [models, setModels] = useState([]);
@@ -49,8 +50,6 @@ function AddShoe(props) {
   const [collaborator, setcollaborator] = useState(null);
   const [types, setTypes] = useState([]);
   const [shoeType, setshoetype] = useState(null);
-  const [cuts, setCuts] = useState([]);
-  const [shoecut, setshoecut] = useState(null);
   const [newBrand, setNewBrand] = useState("");
   const [brandHeadquarters, setBrandHeadquarters] = useState("");
   const [newCollection, setNewCollection] = useState("");
@@ -63,13 +62,7 @@ function AddShoe(props) {
   const [addMethod, setAddMethod] = useState("manual");
   const [sneaksId, setSneaksId] = useState("sneaksId");
   const [retailPrice, setRetailPrice] = useState("");
-
-  const getAllBrands = () => {
-    axios("https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands")
-      .then((res) => res.data)
-      .then((brands) => setBrands(brands))
-      .catch((err) => console.log(err));
-  };
+  const [addShoeEntry, setAddShoeEntry] = useState({});
 
   const getAllCollectionsForBrand = (id) => {
     axios(
@@ -81,34 +74,18 @@ function AddShoe(props) {
   };
 
   const handleChange = (e) => {
-    setBrandId(e.target.value);
+    setAddShoeEntry({ ...addShoeEntry, brandId: e.target.value });
     getAllCollectionsForBrand(e.target.value);
   };
 
-  const getSneaksData = (term) => {
-    axios
-      .get(
-        `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/sneaks?term=${term}`,
-        // "/sneakerdata",
-        {
-          params: {
-            term: term,
-          },
-        }
-      )
-      .then((res) => res.data)
-      .then((shoes) => setSneakerSearchList(shoes))
-      .catch((err) => console.log(err));
-  };
-
-  const getModelsForCollection = (id) => {
-    axios(
-      `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${brandId}/collections/${id}/models`
-    )
-      .then((res) => res.data)
-      .then((models) => setModels(models))
-      .catch((err) => console.log(err));
-  };
+  // const getModelsForCollection = (id) => {
+  //   axios(
+  //     `https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/brands/${brandId}/collections/${id}/models`
+  //   )
+  //     .then((res) => res.data)
+  //     .then((models) => setModels(models))
+  //     .catch((err) => console.log(err));
+  // };
   const getSizeTypes = () => {
     axios(`https://lj9cidfxy2.execute-api.us-east-1.amazonaws.com/dev/sizetype`)
       .then((res) => res.data)
@@ -153,10 +130,10 @@ function AddShoe(props) {
           receipt: recieptstatus,
           nickname: shoeNickname,
           modelId: modelId,
-          brandId: brandId,
-          userId: props.userId,
+          brandId: props.addShoeEntry.brandId,
+          userId: 1,
           collectionId: collectionId,
-          cutId: shoecut,
+          cutId: props.addShoeEntry.shoecut,
           typeId: shoeType,
           collaborator: collaborator,
           releaseDate: releaseDate,
@@ -170,10 +147,10 @@ function AddShoe(props) {
       .then((shoe) => props.getUsersShoes(shoe.userId));
   };
 
-  const handleCollectionChange = (e) => {
-    setCollectionId(e.target.value);
-    getModelsForCollection(e.target.value);
-  };
+  // const handleCollectionChange = (e) => {
+  //   setAddShoeEntry({ ...addShoeEntry, collectionId: e.target.value });
+  //   getModelsForCollection(e.target.value);
+  // };
 
   const handleModelChange = (e) => {
     setModelId(e.target.value);
@@ -181,7 +158,6 @@ function AddShoe(props) {
 
   const handlesubmit = () => {
     addShoe();
-    props.setView("dashboard");
   };
 
   const createBrand = () => {
@@ -196,32 +172,6 @@ function AddShoe(props) {
       .then((res) => console.log(res.data));
   };
 
-  const createBrandField = () => {
-    if (brandId === "0") {
-      return (
-        <div>
-          <label>New Brand: </label>
-          <input
-            placeholder="Enter Brand Name"
-            onChange={(e) => setNewBrand(e.target.value)}
-          ></input>
-          <input
-            placeholder="Enter Brand HQ"
-            onChange={(e) => setBrandHeadquarters(e.target.value)}
-          ></input>
-          <button
-            onClick={() => {
-              createBrand();
-              getAllBrands();
-              setBrandId("choose");
-            }}
-          >
-            Create Brand
-          </button>
-        </div>
-      );
-    }
-  };
   const createCollection = () => {
     axios
       .post(
@@ -232,27 +182,6 @@ function AddShoe(props) {
         }
       )
       .then((res) => setCollectionId(res.data.id));
-  };
-
-  const makeCollection = () => {
-    if (collectionId === "0") {
-      return (
-        <div>
-          <label>New Collection: </label>
-          <input
-            placeholder="Enter Collection"
-            onChange={(e) => setNewCollection(e.target.value)}
-          ></input>
-          <button
-            onClick={() => {
-              createCollection();
-            }}
-          >
-            Create Collection
-          </button>
-        </div>
-      );
-    }
   };
 
   const createModel = () => {
@@ -290,129 +219,58 @@ function AddShoe(props) {
   };
 
   useEffect(() => {
-    getAllBrands();
+    store.dispatch(handleBrandData);
+    store.dispatch(handleCutsData);
     getSizeTypes();
     getAllTypes();
     getAllCuts();
   }, []);
 
-  useEffect(() => {
-    getAllBrands();
-    getAllTypes();
-    getAllCuts();
-  }, [brandId]);
+  // useEffect(() => {
+  //   getAllTypes();
+  //   getAllCuts();
+  // }, [brandId]);
 
-  useEffect(() => {
-    getAllCollectionsForBrand(brandId || 0);
-  }, [collectionId]);
+  // useEffect(() => {
+  //   getAllCollectionsForBrand(brandId || 0);
+  // }, [collectionId]);
 
-  useEffect(() => {
-    getModelsForCollection(collectionId || 0);
-  }, [modelId]);
+  // useEffect(() => {
+  //   getModelsForCollection(collectionId || 0);
+  // }, [modelId]);
 
   const renderAddMethod = () => {
-    if (addMethod === "automated") {
-      return (
-        <RightColumn>
-          <SearchHeading>
-            <h3>Search for shoe below or </h3>
-            <ViewChangeButton onClick={() => setAddMethod("manual")}>
-              Add Shoe Manually
-            </ViewChangeButton>
-          </SearchHeading>
-          <SearchModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            setshoesize={setshoesize}
-            sizetypes={sizetypes}
-            setsizetype={setsizetype}
-            setshoecolor={setshoecolor}
-            setshoetype={setshoetype}
-            types={types}
-            setshoecut={setshoecut}
-            cuts={cuts}
-            setboxstatus={setboxstatus}
-            setpurchaseprice={setpurchaseprice}
-            setrecieptstatus={setrecieptstatus}
-            setcollaborator={setcollaborator}
-            handlesubmit={handlesubmit}
-            shoename={shoename}
-            stylecode={stylecode}
-            brandname={brandname}
-            shoecolor={shoecolor}
-            searchshoesilhoutte={searchshoesilhoutte}
-            modalimageurl={modalimageurl}
-            modalimagealt={modalimagealt}
-          />
-          <SearchAddBar getSneaksData={getSneaksData} />
-          <SearchAddList
-            sneakerSearchList={sneakerSearchList}
-            setshoename={setshoename}
-            setstylecode={setstylecode}
-            setDescription={setDescription}
-            setImageId={setImageId}
-            setModelId={setModelId}
-            setBrandId={setBrandId}
-            brandId={brandId}
-            setCollectionId={setCollectionId}
-            collectionId={collectionId}
-            setModalShow={setModalShow}
-            setshoecolor={setshoecolor}
-            setbrandname={setbrandname}
-            setsearchshoesilhoutte={setsearchshoesilhoutte}
-            setmodalimageurl={setmodalimageurl}
-            setmodalimagealt={setmodalimagealt}
-            setReleaseDate={setReleaseDate}
-            setSneaksId={setSneaksId}
-            setRetailPrice={setRetailPrice}
-          />
-        </RightColumn>
-      );
-    } else if (addMethod === "manual") {
-      return (
-        <div>
-          <SearchHeading>
-            {/* <h3>Add shoe below or </h3>
-            <ViewChangeButton onClick={() => setAddMethod("automated")}>
-              Search For Shoe
-            </ViewChangeButton> */}
-
-            <h3>Add shoe below</h3>
-          </SearchHeading>
-          <ManualAdd
-            brands={brands}
-            createBrandField={createBrandField}
-            handleCollectionChange={handleCollectionChange}
-            collections={collections}
-            makeCollection={makeCollection}
-            setModelId={setModelId}
-            models={models}
-            makeModel={makeModel}
-            setshoename={setshoename}
-            setShoeNickname={setShoeNickname}
-            setstylecode={setstylecode}
-            setshoesize={setshoesize}
-            setsizetype={setsizetype}
-            sizetypes={sizetypes}
-            setshoecolor={setshoecolor}
-            setshoetype={setshoetype}
-            types={types}
-            setshoecut={setshoecut}
-            cuts={cuts}
-            setboxstatus={setboxstatus}
-            setpurchaseprice={setpurchaseprice}
-            setrecieptstatus={setrecieptstatus}
-            setDescription={setDescription}
-            setcollaborator={setcollaborator}
-            handlesubmit={handlesubmit}
-            setView={props.setView}
-            handleChange={handleChange}
-            setImageId={setImageId}
-            setAddMethod={setAddMethod}
-          />
-        </div>
-      );
-    }
+    return (
+      <AddForm>
+        <ManualAdd
+          brands={brands}
+          collections={collections}
+          setModelId={setModelId}
+          models={models}
+          makeModel={makeModel}
+          setshoename={setshoename}
+          setShoeNickname={setShoeNickname}
+          setstylecode={setstylecode}
+          setshoesize={setshoesize}
+          setsizetype={setsizetype}
+          sizetypes={sizetypes}
+          setshoecolor={setshoecolor}
+          setshoetype={setshoetype}
+          types={types}
+          setboxstatus={setboxstatus}
+          setpurchaseprice={setpurchaseprice}
+          setrecieptstatus={setrecieptstatus}
+          setDescription={setDescription}
+          setcollaborator={setcollaborator}
+          handlesubmit={handlesubmit}
+          handleChange={handleChange}
+          setImageId={setImageId}
+          setAddMethod={setAddMethod}
+          setAddShoeEntry={setAddShoeEntry}
+          addShoeEntry={addShoeEntry}
+        />
+      </AddForm>
+    );
   };
 
   return <AddShoeCoulums>{renderAddMethod()}</AddShoeCoulums>;

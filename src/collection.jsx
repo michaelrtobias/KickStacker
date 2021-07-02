@@ -10,8 +10,8 @@ function Collection(props) {
   return (
     <div>
       <h3>Collection</h3>
-      {userSneakers.length > 0 ? (
-        userSneakers
+      {userSneakers.fetching === false > 0 ? (
+        userSneakers.shoes
           .filter(
             (shoe) =>
               shoe.name.toLowerCase().includes(props.searchTerm) ||
